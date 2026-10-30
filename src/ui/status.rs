@@ -27,6 +27,15 @@ pub fn draw(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
         Mode::ConfirmQuit => ("QUIT?", t.err),
         Mode::Review(_) => ("REVIEW", t.warn),
         Mode::Backups(_) => ("BACKUPS", t.info),
+        Mode::Gallery(g) => (
+            match g.kind {
+                crate::app::GalleryKind::Presets => "PRESETS",
+                crate::app::GalleryKind::Themes => "THEMES",
+                crate::app::GalleryKind::Saved => "SAVED",
+            },
+            t.info,
+        ),
+        Mode::Welcome => ("WELCOME", t.ok),
     };
     let flash = app.flash.as_ref().filter(|(_, at)| at.elapsed().as_millis() < 1500);
     let dirty = if let Some((msg, _)) = flash {
@@ -44,16 +53,17 @@ pub fn draw(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
         Span::styled(format!(" {} ", ellipsize_left(&app.config_display(), 34)), t.text()),
         dirty,
         Span::styled("│ ", t.faint()),
-        Span::styled(format!("{} · {} · {}", g.palette, g.shape.label(), g.layout.label()), t.dim()),
+        Span::styled(format!("{} · {} · {} · {}", g.palette, g.shape.label(), g.layout.label(), g.glyphs.label()), t.dim()),
     ]);
     let hints: &[(&str, &str)] = match (&app.mode, app.focus) {
-        (Mode::Normal, Focus::Modules) => &[("␣", "toggle"), ("J/K", "move"), ("⏎", "inspect"), ("g", "globals"), ("P", "preset"), (":", "cmd"), ("?", "help")],
+        (Mode::Normal, Focus::Modules) => &[("␣", "on/off"), ("J/K", "reorder"), ("⏎", "edit module"), (":", "command"), ("?", "help")],
         (Mode::Normal, Focus::Inspector) => &[("j/k", "field"), ("⏎", "edit"), ("x", "reset"), ("esc", "back"), (":", "cmd"), ("?", "help")],
         (Mode::Edit(_), _) => &[("⏎", "apply"), ("esc", "cancel"), ("^u", "clear")],
         (Mode::Picker(_), _) => &[("hjkl", "move"), ("#", "hex"), ("⏎", "apply"), ("esc", "revert")],
         (Mode::Globals(_), _) => &[("j/k", "row"), ("h/l", "change"), ("esc", "close")],
         (Mode::Review(_), _) => &[("y/⏎", "install"), ("j/k", "scroll diff"), ("esc", "cancel")],
         (Mode::Backups(_), _) => &[("j/k", "pick"), ("⏎", "restore…"), ("l", "load into editor"), ("esc", "close")],
+        (Mode::Gallery(_), _) => &[("j/k", "browse"), ("⏎", "apply"), ("esc", "close")],
         (Mode::ConfirmQuit, _) => &[("y", "discard & quit"), ("w", "save & quit"), ("any", "cancel")],
         _ => &[("esc", "close")],
     };

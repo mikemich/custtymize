@@ -15,7 +15,13 @@ pub fn draw(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
     let enabled = app.model.segments.iter().filter(|s| s.enabled).count();
     let block = super::pane(t, "01", "modules", focused).title_bottom(
         Line::from(vec![
-            Span::styled(format!(" {enabled}/{} live ", app.model.segments.len()), t.dim()),
+            Span::styled(" ■", Style::new().fg(t.ok)),
+            Span::styled(" on ", t.dim()),
+            Span::styled("□", t.dim()),
+            Span::styled(" off ", t.dim()),
+            Span::styled("⇥", Style::new().fg(t.info)),
+            Span::styled(" right · ", t.dim()),
+            Span::styled(format!("{enabled}/{} ", app.model.segments.len()), t.dim()),
         ])
         .alignment(Alignment::Right),
     );

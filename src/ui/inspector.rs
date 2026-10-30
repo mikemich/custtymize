@@ -28,7 +28,8 @@ pub fn draw(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
 
     let fields = app.fields();
     let snippet = generate::module_snippet(&app.model, seg);
-    let fields_h = fields.len() as u16 + 3;
+    let headings = (0..fields.len()).filter(|&i| section(&fields, i).is_some()).count();
+    let fields_h = (fields.len() + headings) as u16 + 3;
     let [top, bottom] = Layout::vertical([Constraint::Length(fields_h), Constraint::Min(0)]).areas(inner);
 
     let mut lines = Vec::new();
@@ -42,6 +43,12 @@ pub fn draw(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
     lines.push(Line::from(vec![Span::styled(" ▸ ", Style::new().fg(t.accent2)), Span::styled(blurb, t.dim().add_modifier(Modifier::ITALIC))]));
     lines.push(Line::raw(""));
     for (i, field) in fields.iter().enumerate() {
+        if let Some(title) = section(&fields, i) {
+            lines.push(Line::from(vec![
+                Span::styled(format!("   {title} "), t.dim().add_modifier(Modifier::BOLD)),
+                Span::styled("─".repeat(LABEL_W.saturating_sub(title.len() + 2)), t.faint()),
+            ]));
+        }
         let selected = focused && i == app.field;
         let editing = match &app.mode {
             Mode::Edit(e) if selected && !e.from_globals => Some(e),
@@ -85,6 +92,25 @@ pub fn draw(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
         }));
         f.render_widget(Paragraph::new(out).wrap(Wrap { trim: false }), bottom);
     }
+}
+
+/// A heading before field `i` when it starts a new group (look, format, options).
+fn section(fields: &[Field], i: usize) -> Option<&'static str> {
+    let group = |f: &Field| match f {
+        Field::Symbol | Field::Fg | Field::Bg | Field::Bold | Field::Italic | Field::PromptChar | Field::Success | Field::Error => 1,
+        Field::Format => 2,
+        Field::Opt(_) => 3,
+        _ => 0,
+    };
+    let g = group(&fields[i]);
+    if g == 0 || (i > 0 && group(&fields[i - 1]) == g) {
+        return None;
+    }
+    Some(match g {
+        1 => "look",
+        2 => "format",
+        _ => "options",
+    })
 }
 
 fn on_off(b: bool, t: &Theme) -> Vec<Span<'static>> {

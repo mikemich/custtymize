@@ -3,6 +3,7 @@
 pub mod catalog;
 pub mod color;
 pub mod palette;
+pub mod presets;
 
 use std::collections::BTreeMap;
 
@@ -161,6 +162,29 @@ cycling_enum!(Cap {
     None => "none",
 });
 
+cycling_enum!(Glyphs {
+    Nerd => "nerd font",
+    Unicode => "unicode",
+    Ascii => "ascii",
+});
+
+impl Shape {
+    /// Powerline, rounded and slanted are drawn with Nerd Font glyphs.
+    pub fn needs_nerd_font(&self) -> bool {
+        matches!(self, Shape::Powerline | Shape::Rounded | Shape::Slanted)
+    }
+}
+
+impl Glyphs {
+    pub fn blurb(&self) -> &'static str {
+        match self {
+            Glyphs::Nerd => "Nerd Font icons and powerline shapes (needs a Nerd Font)",
+            Glyphs::Unicode => "standard Unicode and emoji: works in any modern terminal font",
+            Glyphs::Ascii => "plain ASCII words: works everywhere, even over old ssh",
+        }
+    }
+}
+
 #[derive(Clone, PartialEq, Debug)]
 pub struct Globals {
     pub layout: Layout,
@@ -171,6 +195,7 @@ pub struct Globals {
     pub error: Rgb,
     pub add_newline: bool,
     pub palette: &'static str,
+    pub glyphs: Glyphs,
 }
 
 impl Default for Globals {
@@ -185,6 +210,7 @@ impl Default for Globals {
             error: p.error,
             add_newline: true,
             palette: p.name,
+            glyphs: Glyphs::Nerd,
         }
     }
 }
@@ -275,6 +301,70 @@ impl Model {
         }
     }
 
+    /// Switches every module symbol (that the user hasn't customised) to a glyph set, and
+    /// drops shapes and caps the set can't draw.
+    pub fn set_glyphs(&mut self, g: Glyphs) {
+        self.globals.glyphs = g;
+        for s in self.segments.iter_mut().filter(|s| !s.raw && s.literal.is_none() && !s.is_character()) {
+            let def = s.def();
+            if def.symbol_mode == SymbolMode::None {
+                continue;
+            }
+            let (uni, ascii) = catalog::plain_symbols(&s.name);
+            let known = [def.default_symbol, uni, ascii];
+            if s.symbol.as_deref().is_some_and(|x| !known.contains(&x)) {
+                continue;
+            }
+            s.symbol = match g {
+                Glyphs::Nerd => None,
+                Glyphs::Unicode => Some(uni.to_string()),
+                Glyphs::Ascii => Some(ascii.to_string()),
+            };
+        }
+        if ["❯", ">"].contains(&self.globals.prompt_char.as_str()) {
+            self.globals.prompt_char = if g == Glyphs::Ascii { ">" } else { "❯" }.into();
+        }
+        // starship's own git_status and read-only markers aren't ASCII.
+        const ASCII_OPTS: &[(&str, &str, &str)] = &[
+            ("git_status", "ahead", "^"),
+            ("git_status", "behind", "v"),
+            ("git_status", "diverged", "<>"),
+            ("git_status", "deleted", "x"),
+            ("git_status", "renamed", ">"),
+            ("directory", "read_only", " ro"),
+        ];
+        for (module, key, val) in ASCII_OPTS {
+            if let Some(s) = self.find_mut(module) {
+                let ours = s.options.get(*key) == Some(&OptValue::Str(val.to_string()));
+                if g == Glyphs::Ascii && !s.options.contains_key(*key) {
+                    s.options.insert(key.to_string(), OptValue::Str(val.to_string()));
+                } else if g != Glyphs::Ascii && ours {
+                    s.options.remove(*key);
+                }
+            }
+        }
+        // ASCII means ASCII: spell out an ellipsis the user's own options may use.
+        if g == Glyphs::Ascii {
+            for s in &mut self.segments {
+                for v in s.options.values_mut() {
+                    if let OptValue::Str(text) = v
+                        && !text.is_ascii()
+                    {
+                        *text = text.replace('…', "...");
+                    }
+                }
+            }
+        }
+        if g != Glyphs::Nerd {
+            if self.globals.shape.needs_nerd_font() {
+                self.set_shape(Shape::Flat);
+            }
+            if self.globals.cap == Cap::Rounded || (g == Glyphs::Ascii && self.globals.cap == Cap::Gradient) {
+                self.globals.cap = Cap::None;
+            }
+        }
+    }
+
     /// Moves the segment at `idx` by `delta`, keeping `character` pinned to the end.
     /// Returns the new index.
     pub fn move_segment(&mut self, idx: usize, delta: i32) -> usize {
@@ -296,7 +386,6 @@ impl Model {
         self.segments.iter().find(|s| s.name == name)
     }
 
-    #[cfg(test)]
     pub fn find_mut(&mut self, name: &str) -> Option<&mut Segment> {
         self.segments.iter_mut().find(|s| s.name == name)
     }
@@ -324,6 +413,25 @@ mod tests {
         assert_eq!(Layout::parse("right"), Some(Layout::RightPrompt));
         assert_eq!(Cap::None.cycle(1), Cap::Gradient);
         assert_eq!(Cap::Gradient.cycle(-1), Cap::None);
+    }
+
+    #[test]
+    fn glyph_sets_swap_symbols_and_shapes() {
+        let mut m = Model::default();
+        m.set_glyphs(Glyphs::Ascii);
+        assert_eq!(m.find("nodejs").and_then(|s| s.symbol.clone()).as_deref(), Some("node "));
+        assert_eq!(m.globals.prompt_char, ">");
+        assert_eq!(m.globals.shape, Shape::Flat);
+        assert_eq!(m.globals.cap, Cap::None);
+        // A customised symbol survives.
+        if let Some(s) = m.find_mut("rust") {
+            s.symbol = Some("R!".into());
+        }
+        m.set_glyphs(Glyphs::Nerd);
+        assert_eq!(m.find("nodejs").and_then(|s| s.symbol.clone()), None);
+        assert_eq!(m.find("rust").and_then(|s| s.symbol.clone()).as_deref(), Some("R!"));
+        assert!(m.find("git_status").is_some_and(|s| s.options.is_empty()));
+        assert_eq!(m.globals.prompt_char, "❯");
     }
 
     #[test]

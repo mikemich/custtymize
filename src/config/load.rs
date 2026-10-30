@@ -8,7 +8,7 @@ use crate::error::{Error, Result};
 use crate::model::catalog::{self, OptKind, SymbolMode};
 use crate::model::color::parse_style;
 use crate::model::palette;
-use crate::model::{Cap, Layout, Model, OptValue, Segment, Shape, Side};
+use crate::model::{Cap, Glyphs, Layout, Model, OptValue, Segment, Shape, Side};
 
 use super::generate::{self, glyph};
 
@@ -321,8 +321,22 @@ pub fn model_from_doc(doc: &DocumentMut) -> (Model, Vec<String>) {
             seg.format_override = Some(over);
         }
     }
-    // Colours came from the file, not from one of our presets.
-    g.palette = "custom";
+    // Glyph set: Nerd Font unless the config sets symbols and every one of them is ASCII.
+    let text = doc.to_string();
+    let pua = text.chars().any(|c| matches!(c as u32, 0xe000..=0xf8ff | 0xf0000..));
+    g.glyphs = if !pua && text.is_ascii() && text.contains("symbol") { Glyphs::Ascii } else { Glyphs::Nerd };
+    // Name the theme if every segment colour comes from one of ours; otherwise "custom".
+    let plain = g.shape == Shape::Plain;
+    let used: Vec<_> = segments
+        .iter()
+        .filter(|s| s.enabled && !s.raw && !s.is_character() && s.literal.is_none())
+        .map(|s| if plain { s.fg } else { s.bg })
+        .collect();
+    g.palette = palette::PALETTES
+        .iter()
+        .find(|p| !used.is_empty() && used.iter().all(|c| p.accents.contains(c)))
+        .map(|p| p.name)
+        .unwrap_or("custom");
     if let Some(b) = root.get("add_newline").and_then(Item::as_bool) {
         g.add_newline = b;
     }

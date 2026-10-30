@@ -40,18 +40,36 @@ time. Starship itself isn't needed.
 | <img src="docs/assets/picker.svg" alt="colour picker"> | <img src="docs/assets/review.svg" alt="install review with before/after and diff"> |
 | **Colour picker** with live preview | **Review before install**: before, after, diff |
 
-**Presets × shapes:**
+**12 presets** (`P`): complete designs you can apply in one keypress, then tweak.
 
-<img src="docs/assets/prompt-dracula.svg" alt="dracula powerline" height="34"><br>
-<img src="docs/assets/prompt-tokyo-night.svg" alt="tokyo-night rounded" height="34"><br>
-<img src="docs/assets/prompt-catppuccin-mocha.svg" alt="catppuccin-mocha slanted" height="34"><br>
-<img src="docs/assets/prompt-gruvbox.svg" alt="gruvbox powerline" height="34"><br>
-<img src="docs/assets/prompt-nord.svg" alt="nord rounded" height="34">
+<img src="docs/assets/preset-neon-powerline.svg" alt="neon-powerline" height="34"><br>
+<img src="docs/assets/preset-tokyo-slant.svg" alt="tokyo-slant" height="34"><br>
+<img src="docs/assets/preset-pastel-pills.svg" alt="pastel-pills" height="56"><br>
+<img src="docs/assets/preset-synthwave-sunset.svg" alt="synthwave-sunset" height="34"><br>
+<img src="docs/assets/preset-zen.svg" alt="zen" height="56"><br>
+<img src="docs/assets/preset-plain-ascii.svg" alt="plain-ascii" height="34">
+
+**20 colour themes** (`T`): dracula, tokyo-night, catppuccin-mocha, gruvbox, phosphor,
+amber, synthwave, nord, one-dark, rose-pine, everforest, kanagawa, monokai, solarized,
+github-dark, ayu, cyberpunk, sakura, ice and greyscale. The editor's own UI re-colours to
+match.
+
+**3 glyph sets** (`F`), so it works with any font:
+
+| set | for | looks like |
+| --- | --- | --- |
+| nerd font | a Nerd Font (icons, powerline shapes) | <img src="docs/assets/glyphs-nerd.svg" alt="nerd" height="30"> |
+| unicode | any modern terminal font | <img src="docs/assets/glyphs-unicode.svg" alt="unicode" height="30"> |
+| ascii | anywhere, even old ssh sessions | <img src="docs/assets/glyphs-ascii.svg" alt="ascii" height="30"> |
+
+**Saved configs** (`:save <name>`, `O`): keep a library of designs and switch between them.
+
+<img src="docs/assets/presets.svg" alt="presets gallery with live preview" width="100%">
 
 ## Install
 
-Requires Rust 1.88+ and a Nerd Font in your terminal (e.g. JetBrains Mono Nerd Font)
-for the powerline, rounded and slanted glyphs.
+Requires Rust 1.88+. A Nerd Font (e.g. JetBrains Mono Nerd Font) unlocks the
+powerline, rounded and slanted shapes; without one, press `F` for unicode or ascii glyphs.
 
 ```bash
 cargo install --git https://github.com/mikemich/custtymize
@@ -69,8 +87,9 @@ cargo install --path .
 custtymize
 ```
 
-On first run it starts from your `~/.config/starship.toml` if you have one, or from
-defaults. `ctrl-s` reviews and saves to `~/.config/custtymize/prompt.toml`. Your
+On first run a welcome screen walks you through it. It starts from your
+`~/.config/starship.toml` if you have one, or from defaults. Press `P` for presets, `T`
+for themes and `F` for glyphs, or edit modules directly. `ctrl-s` reviews and saves to `~/.config/custtymize/prompt.toml`. Your
 starship file is never touched.
 
 ### 2. Switch your shell over
@@ -149,14 +168,16 @@ Other modules render empty, and the editor warns you about them when you save.
 | --- | --- |
 | `-c, --config <PATH>` | config to use (default `$CUSTTYMIZE_CONFIG`, then `~/.config/custtymize/prompt.toml`, then starship's) |
 | `--dry-run` | print the generated TOML to stdout and exit, writing nothing |
-| `--preset <NAME>` | apply a palette preset first (works with `--dry-run`) |
+| `--preset <NAME>` | apply a complete design first, e.g. `zen`, `plain-ascii` (works with `--dry-run`) |
+| `--theme <NAME>` | apply a colour theme first |
+| `--glyphs <SET>` | `nerd`, `unicode` or `ascii` |
 | `--shape <SHAPE>` | apply a segment shape first (works with `--dry-run`) |
 | `--print-preview` | render the prompt once in the preview sandbox, print the ANSI and exit |
 | `--no-boot` | skip the boot sequence |
 | `--ansi256` / `--truecolor` | force the UI colour depth (auto-detected otherwise) |
 
 ```bash
-custtymize --dry-run --preset tokyo-night --shape powerline > ~/.config/starship.toml   # export for starship
+custtymize --dry-run --preset tokyo-slant --theme kanagawa > ~/.config/starship.toml   # export for starship
 ```
 
 ## Keys
@@ -173,7 +194,11 @@ custtymize --dry-run --preset tokyo-night --shape powerline > ~/.config/starship
 | `x` / `⌫` | reset field to default (format → generated, option → module default) |
 | `p` | Nerd Font glyph picker (on the symbol field; `tab` from symbol edit too) |
 | `g` | global options popup (layout, shape, cap, prompt char, colours, palette) |
-| `S` `L` `C` `P` | cycle shape / layout / left cap / palette preset |
+| `P` | presets gallery: complete designs with a live preview |
+| `T` | themes gallery (`[` `]` flip through themes without it) |
+| `F` | cycle glyphs: nerd font / unicode / ascii |
+| `O` | saved configs gallery (`d` twice deletes one) |
+| `S` `L` `C` | cycle shape / layout / left cap |
 | `s` | cycle preview scenario: dirty repo, clean repo, deep path, ssh, home |
 | `u` / `ctrl-r` | undo / redo |
 | `ctrl-s` | install: opens the review screen (before/after prompts + diff); `y` writes |
@@ -197,7 +222,12 @@ preset, and a grey ramp.
 | `:backups` | browse, preview and restore previous setups |
 | `:w!` | save even if the file changed on disk since it was loaded |
 | `:q` / `:q!` / `:wq` / `:x` | quit / quit discarding / save & quit |
-| `:preset <name>` | `dracula` `tokyo-night` `catppuccin-mocha` `gruvbox` `phosphor` `amber` `synthwave` `nord` |
+| `:preset [name]` | apply a design: `neon-powerline` `pastel-pills` `tokyo-slant` `zen` `one-liner` `full-stack` `hacker-terminal` `synthwave-sunset` `cyber-slant` `plain-ascii` `amber-crt` `kanagawa-wave` (no name: gallery) |
+| `:theme [name]` | apply a colour theme (no name: gallery) |
+| `:glyphs <set>` | `nerd` `unicode` `ascii` |
+| `:save[!] <name>` | save the current design to `~/.config/custtymize/saved/` (`!` replaces) |
+| `:open [name]` | open a saved design into the editor (no name: gallery) |
+| `:welcome` | show the getting-started screen again |
 | `:undo` / `:redo` | |
 | `:export <path>` | validate and write the TOML elsewhere (e.g. `~/.config/starship.toml`) |
 | `:shape <s>` | `powerline` `rounded` `slanted` `flat` `plain` |
@@ -276,11 +306,13 @@ src/
     mod.rs              Segment, Globals, Model (+ Shape/Layout/Cap enums)
     color.rs            Rgb, hex/style parsing, xterm-256 fallback, Dracula constants
     catalog.rs          per-module knowledge: body variables, symbol mode, options
-    palette.rs          presets
+    palette.rs          colour themes
+    presets.rs          complete designs (modules, shape, layout, theme, glyphs)
   config/
     generate.rs         Model → TOML (format strings, separator chaining, minimal diff)
     load.rs             TOML → Model (best effort, lossless for what it can't model)
     save.rs             backup + atomic write
+    library.rs          saved configs
   ui/                   theme, boot, preview, modules, inspector, log, status, popups, matrix
 ```
 
@@ -325,7 +357,11 @@ The tests cover:
   `prev_bg`, ANSI and shell escaping, git porcelain parsing, directory truncation,
   versions, durations, `$all` / `$custom`, validation and the init scripts.
 * **Editor:** separator chaining, caps, layouts, style strings, comment and
-  unknown-key preservation, byte-identical round trips, backups and palettes.
+  unknown-key preservation, byte-identical round trips, backups and themes.
+* **Presets and glyphs:** every preset generates a config the engine accepts with no
+  warnings and reloads to the same shape, layout and theme; ASCII presets contain only
+  ASCII, and unicode ones contain no Nerd Font glyphs. Also covered: glyph switching and
+  saved-config save, list and overwrite.
 
 ## Notes
 

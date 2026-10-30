@@ -222,6 +222,14 @@ kbd {
 .bench .c { color: var(--green); font-weight: 600; }
 @media (max-width: 720px) { .bench .row { grid-template-columns: 1fr 1fr; } .bench .row > span:first-child { grid-column: 1 / -1; } .bench i { width: calc(var(--w) * .4); } }
 
+
+/* theme swatches */
+.themes { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 34px; }
+.theme { background: var(--d); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+.theme .chips { display: flex; gap: 4px; margin-bottom: 10px; }
+.theme .chips i { flex: 1; height: 26px; border-radius: 4px; display: block; }
+.theme span { font-size: 13px; color: #f0f0f0; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+
 footer { border-top: 1px solid var(--line); padding: 34px 0 48px; color: var(--comment); font-size: 13px; }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: space-between; }
 
@@ -241,6 +249,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
     <a class="logo" href="#"><span class="g">▓▒░</span> custtymize</a>
     <div class="links">
       <a href="#presets">Presets</a>
+      <a href="#themes">Themes</a>
       <a href="#speed">Speed</a>
       <a href="#features">Features</a>
       <a href="#keys">Keys</a>
@@ -252,7 +261,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
 
 <header class="hero">
   <div class="wrap">
-    <span class="badge"><b>●</b> v0.1.0 · own prompt engine · Rust · MIT</span>
+    <span class="badge"><b>●</b> v0.1.0 · 12 presets · 20 themes · own prompt engine · MIT</span>
     <h1>Design your <span class="grad">shell prompt</span> in a hacker <span style="white-space:nowrap">console<span class="cursor" aria-hidden="true"></span></span></h1>
     <p class="lede">
       custtymize is a prompt designer and a prompt engine in one binary. Toggle modules, pick colours,
@@ -267,25 +276,72 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
       <a class="btn ghost" href="https://github.com/mikemich/custtymize">Star on GitHub</a>
     </div>
     <div class="shot reveal">
-      <img src="assets/main.svg" width="1103" height="723" alt="custtymize main screen: live prompt preview on top, module list on the left, inspector on the right and a log at the bottom">
+      <img src="assets/main.svg" width="1103" height="760" alt="custtymize main screen: live prompt preview on top, module list on the left, inspector on the right and a log at the bottom">
     </div>
   </div>
 </header>
 
 <section id="presets" class="presets">
   <div class="wrap">
-    <p class="kicker">presets × shapes</p>
-    <h2>Eight palettes. Five shapes. One keypress each.</h2>
-    <p class="sub">Every prompt below came out of custtymize. Press <kbd>P</kbd> to cycle palettes and <kbd>S</kbd> to cycle shapes; the preview redraws as fast as you can press.</p>
+    <p class="kicker">presets</p>
+    <h2>Twelve complete designs. Press <kbd>P</kbd>, pick one, make it yours.</h2>
+    <p class="sub">A preset sets everything at once: modules, order, shape, layout, theme and glyphs. Browse them with a live preview on your own setup, apply with <kbd>⏎</kbd>, undo with <kbd>u</kbd>.</p>
     <div class="strips">
-      <div class="strip reveal"><div class="name"><b>dracula</b>powerline</div><img src="assets/prompt-dracula.svg" alt="Dracula powerline prompt" loading="lazy"></div>
-      <div class="strip reveal"><div class="name"><b>tokyo-night</b>rounded</div><img src="assets/prompt-tokyo-night.svg" alt="Tokyo Night rounded prompt" loading="lazy"></div>
-      <div class="strip reveal"><div class="name"><b>catppuccin-mocha</b>slanted</div><img src="assets/prompt-catppuccin-mocha.svg" alt="Catppuccin Mocha slanted prompt" loading="lazy"></div>
-      <div class="strip reveal"><div class="name"><b>gruvbox</b>powerline</div><img src="assets/prompt-gruvbox.svg" alt="Gruvbox powerline prompt" loading="lazy"></div>
-      <div class="strip reveal"><div class="name"><b>synthwave</b>flat</div><img src="assets/prompt-synthwave.svg" alt="Synthwave flat prompt" loading="lazy"></div>
-      <div class="strip reveal"><div class="name"><b>nord</b>rounded</div><img src="assets/prompt-nord.svg" alt="Nord rounded prompt" loading="lazy"></div>
-      <div class="strip reveal"><div class="name"><b>amber</b>powerline</div><img src="assets/prompt-amber.svg" alt="Amber CRT powerline prompt" loading="lazy"></div>
-      <div class="strip reveal"><div class="name"><b>phosphor</b>plain</div><img src="assets/prompt-phosphor.svg" alt="Phosphor green plain prompt" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>neon-powerline</b>Dracula powerline, gradient cap</div><img src="assets/preset-neon-powerline.svg" alt="neon-powerline preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>pastel-pills</b>Catppuccin rounded pills, two lines</div><img src="assets/preset-pastel-pills.svg" alt="pastel-pills preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>tokyo-slant</b>Tokyo Night slants, clock on the right</div><img src="assets/preset-tokyo-slant.svg" alt="tokyo-slant preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>zen</b>Minimal text, no Nerd Font needed</div><img src="assets/preset-zen.svg" alt="zen preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>one-liner</b>Everything on one short line</div><img src="assets/preset-one-liner.svg" alt="one-liner preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>full-stack</b>Every dev module, gruvbox powerline</div><img src="assets/preset-full-stack.svg" alt="full-stack preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>hacker-terminal</b>Phosphor-green 1983 mainframe</div><img src="assets/preset-hacker-terminal.svg" alt="hacker-terminal preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>synthwave-sunset</b>Neon pills, battery and clock</div><img src="assets/preset-synthwave-sunset.svg" alt="synthwave-sunset preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>cyber-slant</b>Cyberpunk yellow-and-cyan slants</div><img src="assets/preset-cyber-slant.svg" alt="cyber-slant preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>plain-ascii</b>Pure ASCII, safe anywhere</div><img src="assets/preset-plain-ascii.svg" alt="plain-ascii preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>amber-crt</b>Amber monochrome, time up front</div><img src="assets/preset-amber-crt.svg" alt="amber-crt preset" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>kanagawa-wave</b>Versions on the right</div><img src="assets/preset-kanagawa-wave.svg" alt="kanagawa-wave preset" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section id="themes">
+  <div class="wrap">
+    <p class="kicker">themes</p>
+    <h2>Twenty colour themes. The whole app wears them.</h2>
+    <p class="sub">Press <kbd>T</kbd> to browse, or <kbd>[</kbd> <kbd>]</kbd> to flip through. The editor's own UI re-colours to match, so you see the theme everywhere at once.</p>
+    <div class="themes reveal">
+      <div class="theme" style="--d:#282a36"><div class="chips"><i style="background:#bd93f9"></i><i style="background:#ff79c6"></i><i style="background:#8be9fd"></i><i style="background:#50fa7b"></i><i style="background:#ffb86c"></i><i style="background:#f1fa8c"></i><i style="background:#6272a4"></i><i style="background:#44475a"></i></div><span>dracula</span></div>
+      <div class="theme" style="--d:#1a1b26"><div class="chips"><i style="background:#7aa2f7"></i><i style="background:#bb9af7"></i><i style="background:#7dcfff"></i><i style="background:#9ece6a"></i><i style="background:#e0af68"></i><i style="background:#f7768e"></i><i style="background:#2ac3de"></i><i style="background:#414868"></i></div><span>tokyo-night</span></div>
+      <div class="theme" style="--d:#1e1e2e"><div class="chips"><i style="background:#cba6f7"></i><i style="background:#f38ba8"></i><i style="background:#fab387"></i><i style="background:#f9e2af"></i><i style="background:#a6e3a1"></i><i style="background:#94e2d5"></i><i style="background:#89b4fa"></i><i style="background:#b4befe"></i></div><span>catppuccin-mocha</span></div>
+      <div class="theme" style="--d:#282828"><div class="chips"><i style="background:#d65d0e"></i><i style="background:#d79921"></i><i style="background:#689d6a"></i><i style="background:#458588"></i><i style="background:#b16286"></i><i style="background:#98971a"></i><i style="background:#cc241d"></i><i style="background:#665c54"></i></div><span>gruvbox</span></div>
+      <div class="theme" style="--d:#001a08"><div class="chips"><i style="background:#33ff66"></i><i style="background:#1fcc4d"></i><i style="background:#15993a"></i><i style="background:#0e6b29"></i><i style="background:#0a4d1d"></i></div><span>phosphor</span></div>
+      <div class="theme" style="--d:#1a1000"><div class="chips"><i style="background:#ffb000"></i><i style="background:#e69c00"></i><i style="background:#b37700"></i><i style="background:#805500"></i><i style="background:#523600"></i></div><span>amber</span></div>
+      <div class="theme" style="--d:#0d0221"><div class="chips"><i style="background:#ff2a6d"></i><i style="background:#d300c5"></i><i style="background:#7700ff"></i><i style="background:#05d9e8"></i><i style="background:#fee440"></i><i style="background:#1a1a40"></i></div><span>synthwave</span></div>
+      <div class="theme" style="--d:#2e3440"><div class="chips"><i style="background:#5e81ac"></i><i style="background:#81a1c1"></i><i style="background:#88c0d0"></i><i style="background:#a3be8c"></i><i style="background:#ebcb8b"></i><i style="background:#d08770"></i><i style="background:#b48ead"></i><i style="background:#4c566a"></i></div><span>nord</span></div>
+      <div class="theme" style="--d:#282c34"><div class="chips"><i style="background:#61afef"></i><i style="background:#c678dd"></i><i style="background:#56b6c2"></i><i style="background:#98c379"></i><i style="background:#e5c07b"></i><i style="background:#e06c75"></i><i style="background:#d19a66"></i><i style="background:#3e4451"></i></div><span>one-dark</span></div>
+      <div class="theme" style="--d:#191724"><div class="chips"><i style="background:#c4a7e7"></i><i style="background:#ebbcba"></i><i style="background:#9ccfd8"></i><i style="background:#f6c177"></i><i style="background:#31748f"></i><i style="background:#eb6f92"></i><i style="background:#524f67"></i><i style="background:#26233a"></i></div><span>rose-pine</span></div>
+      <div class="theme" style="--d:#2d353b"><div class="chips"><i style="background:#a7c080"></i><i style="background:#83c092"></i><i style="background:#7fbbb3"></i><i style="background:#dbbc7f"></i><i style="background:#e69875"></i><i style="background:#d699b6"></i><i style="background:#e67e80"></i><i style="background:#475258"></i></div><span>everforest</span></div>
+      <div class="theme" style="--d:#1f1f28"><div class="chips"><i style="background:#7e9cd8"></i><i style="background:#957fb8"></i><i style="background:#7aa89f"></i><i style="background:#98bb6c"></i><i style="background:#e6c384"></i><i style="background:#ffa066"></i><i style="background:#d27e99"></i><i style="background:#363646"></i></div><span>kanagawa</span></div>
+      <div class="theme" style="--d:#272822"><div class="chips"><i style="background:#f92672"></i><i style="background:#a6e22e"></i><i style="background:#66d9ef"></i><i style="background:#fd971f"></i><i style="background:#ae81ff"></i><i style="background:#e6db74"></i><i style="background:#75715e"></i><i style="background:#49483e"></i></div><span>monokai</span></div>
+      <div class="theme" style="--d:#002b36"><div class="chips"><i style="background:#268bd2"></i><i style="background:#2aa198"></i><i style="background:#859900"></i><i style="background:#b58900"></i><i style="background:#cb4b16"></i><i style="background:#d33682"></i><i style="background:#6c71c4"></i><i style="background:#073642"></i></div><span>solarized</span></div>
+      <div class="theme" style="--d:#0d1117"><div class="chips"><i style="background:#58a6ff"></i><i style="background:#bc8cff"></i><i style="background:#39c5cf"></i><i style="background:#3fb950"></i><i style="background:#d29922"></i><i style="background:#ff7b72"></i><i style="background:#8b949e"></i><i style="background:#30363d"></i></div><span>github-dark</span></div>
+      <div class="theme" style="--d:#0b0e14"><div class="chips"><i style="background:#ffb454"></i><i style="background:#59c2ff"></i><i style="background:#aad94c"></i><i style="background:#d2a6ff"></i><i style="background:#95e6cb"></i><i style="background:#f07178"></i><i style="background:#e6b673"></i><i style="background:#1f2430"></i></div><span>ayu</span></div>
+      <div class="theme" style="--d:#000b1e"><div class="chips"><i style="background:#fcee0a"></i><i style="background:#00f0ff"></i><i style="background:#ff003c"></i><i style="background:#711c91"></i><i style="background:#0abdc6"></i><i style="background:#ea00d9"></i><i style="background:#133e7c"></i><i style="background:#091833"></i></div><span>cyberpunk</span></div>
+      <div class="theme" style="--d:#2a2024"><div class="chips"><i style="background:#ffb7c5"></i><i style="background:#f4a7b9"></i><i style="background:#c9a0dc"></i><i style="background:#a8d8ea"></i><i style="background:#fcd5ce"></i><i style="background:#b5ead7"></i><i style="background:#e2c2ff"></i><i style="background:#5c4b51"></i></div><span>sakura</span></div>
+      <div class="theme" style="--d:#0f1a24"><div class="chips"><i style="background:#8fbcbb"></i><i style="background:#a3d5ff"></i><i style="background:#6ec1e4"></i><i style="background:#4a90c2"></i><i style="background:#2e6f9e"></i><i style="background:#1d4e73"></i><i style="background:#c9e7f5"></i><i style="background:#22303c"></i></div><span>ice</span></div>
+      <div class="theme" style="--d:#161616"><div class="chips"><i style="background:#e0e0e0"></i><i style="background:#b0b0b0"></i><i style="background:#8a8a8a"></i><i style="background:#6a6a6a"></i><i style="background:#4a4a4a"></i><i style="background:#333333"></i></div><span>greyscale</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="glyphs" class="presets">
+  <div class="wrap">
+    <p class="kicker">glyphs</p>
+    <h2>No Nerd Font? No problem.</h2>
+    <p class="sub">Press <kbd>F</kbd> to match the prompt to what your font can draw. Same design, three glyph sets:</p>
+    <div class="strips">
+      <div class="strip reveal"><div class="name"><b>nerd font</b>icons and powerline shapes</div><img src="assets/glyphs-nerd.svg" alt="nerd font glyphs" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>unicode</b>any modern font, emoji</div><img src="assets/glyphs-unicode.svg" alt="unicode glyphs" loading="lazy"></div>
+      <div class="strip reveal"><div class="name"><b>ascii</b>plain words, works everywhere</div><img src="assets/glyphs-ascii.svg" alt="ascii glyphs" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -320,7 +376,25 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
           <li><b>One line to switch</b>: <code>eval "$(custtymize init zsh)"</code>, plus bash and fish</li>
         </ul>
       </div>
-      <div class="media reveal"><img src="assets/rounded.svg" width="1103" height="723" alt="Rounded Dracula prompt in the live preview" loading="lazy"></div>
+      <div class="media reveal"><img src="assets/rounded.svg" width="1103" height="760" alt="Rounded Dracula prompt in the live preview" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="feature">
+      <div class="text reveal">
+        <p class="kicker">galleries &amp; saved configs</p>
+        <h2>Try ten looks in ten seconds.</h2>
+        <p class="sub">Presets, themes and your own saved designs open in a gallery that renders each one live as you move through it.</p>
+        <ul>
+          <li><b><kbd>P</kbd> presets</b>, <b><kbd>T</kbd> themes</b>, <b><kbd>O</kbd> saved configs</b>: same gallery, same keys</li>
+          <li><b><code>:save work</code></b> keeps the current design in your library; open it later with <kbd>O</kbd></li>
+          <li><b>Everything is undoable</b>, and nothing is installed until <kbd>ctrl-s</kbd> and <kbd>y</kbd></li>
+        </ul>
+      </div>
+      <div class="media reveal"><img src="assets/presets.svg" width="1103" height="760" alt="Presets gallery with live preview" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -338,7 +412,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
           <li><b>Reorder</b> with <kbd>J</kbd> <kbd>K</kbd>, toggle with <kbd>space</kbd>, send right with <kbd>R</kbd></li>
         </ul>
       </div>
-      <div class="media reveal"><img src="assets/picker.svg" width="1103" height="723" alt="Colour picker popup over the inspector" loading="lazy"></div>
+      <div class="media reveal"><img src="assets/picker.svg" width="1103" height="760" alt="Colour picker popup over the inspector" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -356,7 +430,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
           <li><b>Backed up</b> to <code>prompt.toml.bak-&lt;timestamp&gt;</code> first, every time</li>
         </ul>
       </div>
-      <div class="media reveal"><img src="assets/review.svg" width="1103" height="723" alt="Install review screen with before and after prompts and a TOML diff" loading="lazy"></div>
+      <div class="media reveal"><img src="assets/review.svg" width="1103" height="760" alt="Install review screen with before and after prompts and a TOML diff" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -374,7 +448,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
           <li><b>Load</b> a backup into the editor with <kbd>l</kbd> without touching the file</li>
         </ul>
       </div>
-      <div class="media reveal"><img src="assets/backups.svg" width="1103" height="723" alt="Backup browser listing three backups with a live preview" loading="lazy"></div>
+      <div class="media reveal"><img src="assets/backups.svg" width="1103" height="760" alt="Backup browser listing three backups with a live preview" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -387,6 +461,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
       <div class="card reveal"><div class="ic">⇄</div><h3>Lossless round-trip</h3><p>Edits go through <code>toml_edit</code>. Comments, key order, unknown modules and literal text survive, and a no-op save is byte-identical.</p></div>
       <div class="card reveal"><div class="ic">↶</div><h3>Undo &amp; redo</h3><p><kbd>u</kbd> and <kbd>ctrl-r</kbd>, across every change, including presets and shape swaps.</p></div>
       <div class="card reveal"><div class="ic">:</div><h3>Vim-style commands</h3><p><code>:w</code>, <code>:preset</code>, <code>:set git_branch.bg #ff79c6</code>, <code>:add kubernetes</code>, with tab completion and history.</p></div>
+      <div class="card reveal"><div class="ic">⛁</div><h3>Saved configs</h3><p><code>:save work</code>, <code>:save home</code>, then <kbd>O</kbd> to switch between them, with a preview of each. <kbd>d</kbd> twice deletes.</p></div>
       <div class="card reveal"><div class="ic">▤</div><h3>Layouts &amp; caps</h3><p>One line, two lines or a right prompt. Gradient <code>░▒▓</code> or rounded caps. Your prompt character in success and error colours.</p></div>
       <div class="card reveal"><div class="ic">⚙</div><h3>Scriptable</h3><p><code>--dry-run --preset nord --shape rounded</code> prints the TOML; <code>custtymize timings</code> shows each module's cost.</p></div>
       <div class="card reveal"><div class="ic">⛨</div><h3>Hostile-repo safe</h3><p>Branch names are shown literally. A branch called <code>$(rm -rf ~)</code> is just text, in zsh and bash.</p></div>
@@ -408,7 +483,11 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
       <div><kbd>space</kbd><span>toggle module</span></div>
       <div><kbd>J K</kbd><span>reorder module</span></div>
       <div><kbd>⏎</kbd><span>edit field / open picker</span></div>
-      <div><kbd>S C P</kbd><span>cycle shape, cap, preset</span></div>
+      <div><kbd>P</kbd><span>presets gallery</span></div>
+      <div><kbd>T</kbd><span>themes gallery</span></div>
+      <div><kbd>F</kbd><span>glyphs: nerd / unicode / ascii</span></div>
+      <div><kbd>O</kbd><span>saved configs</span></div>
+      <div><kbd>S L C</kbd><span>cycle shape, layout, cap</span></div>
       <div><kbd>s</kbd><span>cycle preview scenario</span></div>
       <div><kbd>g</kbd><span>global options</span></div>
       <div><kbd>u ^r</kbd><span>undo / redo</span></div>
@@ -425,7 +504,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
   <div class="wrap">
     <p class="kicker">install</p>
     <h2>Thirty seconds to a better prompt.</h2>
-    <p class="sub">You need Rust and a Nerd Font in your terminal for the powerline, rounded and slanted glyphs. No starship.</p>
+    <p class="sub">You need Rust. A Nerd Font unlocks the powerline, rounded and slanted shapes; without one, press <kbd>F</kbd> for unicode or ascii glyphs. No starship.</p>
     <div class="term">
       <div class="bar"><i style="background:#ff5555"></i><i style="background:#f1fa8c"></i><i style="background:#50fa7b"></i></div>
 <pre><span class="c"># install</span>
@@ -440,7 +519,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
     <div class="reqs">
       <span><b>Rust</b> 1.88+</span>
       <span><b>zsh · bash · fish</b></span>
-      <span><b>Nerd Font</b> e.g. JetBrains Mono</span>
+      <span><b>any font</b> (Nerd Font for the fancy shapes)</span>
       <span><b>macOS</b> tested · Linux should work</span>
     </div>
     <div class="cta" style="margin-top:34px">

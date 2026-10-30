@@ -71,11 +71,42 @@ impl Theme {
         }
     }
 
+    /// The UI wears the active prompt theme: its background, text and accents.
     pub fn for_palette(name: &str) -> Theme {
         match name {
             "phosphor" => Theme::mono(Rgb(0x33, 0xff, 0x66)),
             "amber" => Theme::mono(Rgb(0xff, 0xb0, 0x00)),
-            _ => Theme::dracula(),
+            "dracula" => Theme::dracula(),
+            _ => match crate::model::palette::find(name) {
+                Some(p) if name != "custom" => Theme::from_palette(p),
+                _ => Theme::dracula(),
+            },
+        }
+    }
+
+    pub fn from_palette(p: &crate::model::palette::Palette) -> Theme {
+        let black = Rgb(0, 0, 0);
+        let (dark, light) = (p.dark, p.light);
+        let a = |i: usize| p.accents[i % p.accents.len()];
+        // Prefer accents that stand out against the background for text-like roles.
+        let bright: Vec<Rgb> = p.accents.iter().copied().filter(|c| c.luminance() > 0.12).collect();
+        let b = |i: usize| if bright.is_empty() { a(i) } else { bright[i % bright.len()] };
+        Theme {
+            bg: c(dark.mix(black, 0.35)),
+            scan: c(dark.mix(black, 0.2)),
+            screen: c(dark),
+            fg: c(light),
+            dim: c(light.mix(dark, 0.45)),
+            faint: c(dark.mix(light, 0.16)),
+            border: c(dark.mix(light, 0.28)),
+            focus: c(b(0)),
+            accent: c(b(0)),
+            accent2: c(b(1)),
+            ok: c(p.success),
+            warn: c(b(3)),
+            err: c(p.error),
+            info: c(b(2)),
+            sel_bg: c(dark.mix(b(0), 0.22)),
         }
     }
 

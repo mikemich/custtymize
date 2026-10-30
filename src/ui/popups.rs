@@ -7,7 +7,7 @@ use ratatui::text::{Line, Span};
 use ratatui::widgets::{Clear, Paragraph};
 
 use super::theme::Theme;
-use crate::app::{App, BackupBrowser, ColorPicker, GLYPH_COLS, GlobalRow, InstallKind, InstallReview, Mode, RenderedPrompt};
+use crate::app::{App, BackupBrowser, ColorPicker, GLYPH_COLS, Gallery, GalleryKind, GlobalRow, InstallKind, InstallReview, Mode, RenderedPrompt};
 use crate::config::diff::{self, DiffLine};
 use crate::model::catalog::GLYPHS;
 use crate::model::color::Rgb;
@@ -24,6 +24,8 @@ pub fn draw(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
         Mode::ConfirmQuit => confirm(f, area, t),
         Mode::Review(r) => review(f, area, app, r, t),
         Mode::Backups(b) => backups(f, area, b, t),
+        Mode::Gallery(g) => gallery(f, area, app, g, t),
+        Mode::Welcome => welcome(f, area, app, t),
         _ => {}
     }
 }
@@ -67,6 +69,7 @@ fn globals(f: &mut Frame, area: Rect, app: &App, row: usize, t: &Theme) {
                 v
             }
             GlobalRow::AddNewline => vec![Span::raw(if g.add_newline { "yes" } else { "no" })],
+            GlobalRow::Glyphs => vec![Span::raw(g.glyphs.label())],
         };
         let cycles = !matches!(gr, GlobalRow::PromptChar | GlobalRow::Success | GlobalRow::Error);
         let mut spans = vec![
@@ -174,6 +177,11 @@ fn glyphs(f: &mut Frame, area: Rect, idx: usize, t: &Theme) {
 }
 
 const KEYS: &[(&str, &str)] = &[
+    ("P", "presets: complete designs, with live preview"),
+    ("T", "themes: colour palettes (the UI follows along)"),
+    ("F", "glyphs: nerd font / unicode / ascii — match your font"),
+    ("O", "open a saved config · :save <name> to add one"),
+    ("[ ]", "previous / next theme without the gallery"),
     ("j/k ↑/↓", "move selection"),
     ("tab", "switch modules ⇄ inspector"),
     ("space", "toggle module on/off"),
@@ -184,7 +192,7 @@ const KEYS: &[(&str, &str)] = &[
     ("x / ⌫", "reset field to default"),
     ("p", "glyph picker (on symbol)"),
     ("g", "global options"),
-    ("S L C P", "cycle shape / layout / cap / preset"),
+    ("S L C", "cycle shape / layout / left cap"),
     ("s", "cycle preview scenario"),
     ("u / ^r", "undo / redo"),
     ("^s", "install: review before/after, then backup → write"),
@@ -208,7 +216,11 @@ fn help(f: &mut Frame, area: Rect, scroll: u16, t: &Theme) {
         lines.push(Line::from(vec![Span::styled(format!("  :{c:<9}"), Style::new().fg(t.info)), Span::styled(*h, t.text())]));
     }
     lines.push(Line::raw(""));
-    lines.push(Line::styled(" presets: ".to_string() + &PALETTES.iter().map(|p| p.name).collect::<Vec<_>>().join(" · "), t.dim()));
+    lines.push(Line::styled(" themes: ".to_string() + &PALETTES.iter().map(|p| p.name).collect::<Vec<_>>().join(" · "), t.dim()));
+    lines.push(Line::styled(
+        " presets: ".to_string() + &crate::model::presets::PRESETS.iter().map(|p| p.name).collect::<Vec<_>>().join(" · "),
+        t.dim(),
+    ));
     f.render_widget(Paragraph::new(lines).scroll((scroll, 0)), inner);
 }
 
@@ -409,4 +421,168 @@ fn backups(f: &mut Frame, area: Rect, b: &BackupBrowser, t: &Theme) {
         Span::styled(" close", t.dim()),
     ]);
     f.render_widget(Paragraph::new(keys), Rect::new(inner.x, inner.bottom() - 1, inner.width, 1));
+}
+
+fn key(k: &str, t: &Theme) -> Span<'static> {
+    Span::styled(k.to_string(), Style::new().fg(t.accent2).add_modifier(Modifier::BOLD))
+}
+
+fn gallery(f: &mut Frame, area: Rect, app: &App, g: &Gallery, base: &Theme) {
+    // The themes gallery wears the highlighted theme, so you see the whole UI in it.
+    let themed;
+    let t = match (g.kind, g.items.get(g.idx)) {
+        (GalleryKind::Themes, Some(item)) => {
+            themed = Theme::for_palette(&item.name);
+            &themed
+        }
+        _ => base,
+    };
+    let num = match g.kind {
+        GalleryKind::Presets => "P",
+        GalleryKind::Themes => "T",
+        GalleryKind::Saved => "O",
+    };
+    let below = g.preview.as_ref().map(pair_height).unwrap_or(1) + 4;
+    let list_rows = g.items.len().clamp(1, 14) as u16;
+    let h = (list_rows + 1 + below + 2).min(area.height.saturating_sub(2));
+    let outer = Rect::new(area.x + 3, area.y + (area.height - h) / 2, area.width.saturating_sub(6), h);
+    let title = format!("{} // {} of {}", g.kind.title(), g.idx + 1, g.items.len());
+    let inner = frame(f, outer, num, &title, t);
+    let list_h = inner.height.saturating_sub(below);
+    let offset = g.idx.saturating_sub(list_h.saturating_sub(1) as usize);
+    let name_w = g.items.iter().map(|i| i.name.chars().count()).max().unwrap_or(10).min(28);
+    let current = match g.kind {
+        GalleryKind::Themes => Some(app.model.globals.palette),
+        _ => None,
+    };
+    let rows: Vec<Line> = g
+        .items
+        .iter()
+        .enumerate()
+        .skip(offset)
+        .take(list_h as usize)
+        .map(|(i, item)| {
+            let sel = i == g.idx;
+            let mut spans = vec![
+                Span::styled(if sel { " ❯ " } else { "   " }, Style::new().fg(t.accent2)),
+                Span::styled(
+                    format!("{:<w$}  ", item.name, w = name_w),
+                    if sel { t.text().add_modifier(Modifier::BOLD) } else { t.text() },
+                ),
+            ];
+            for c in item.swatches.iter().take(8) {
+                spans.push(Span::styled("▮", Style::new().fg((*c).into())));
+            }
+            if !item.swatches.is_empty() {
+                spans.push(Span::raw("  "));
+            }
+            if current == Some(item.name.as_str()) {
+                spans.push(Span::styled("(current) ", Style::new().fg(t.ok)));
+            }
+            spans.push(Span::styled(item.blurb.clone(), t.dim()));
+            Line::from(spans).style(if sel { Style::new().bg(t.sel_bg) } else { Style::new() })
+        })
+        .collect();
+    f.render_widget(Paragraph::new(rows), Rect::new(inner.x, inner.y, inner.width, list_h));
+
+    let mut y = inner.y + list_h + 1;
+    let name = g.items.get(g.idx).map(|i| i.name.clone()).unwrap_or_default();
+    let what = if g.kind == GalleryKind::Themes { format!("PREVIEW · {name} on your current design") } else { format!("PREVIEW · {name}") };
+    f.render_widget(Paragraph::new(heading(what, Style::new().fg(t.info), t)), Rect::new(inner.x, y, inner.width, 1));
+    y += 1;
+    match (&g.preview, &g.error) {
+        (_, Some(e)) => {
+            f.render_widget(
+                Paragraph::new(Line::styled(format!("   ✘ {}", super::ellipsize(e, inner.width as usize - 6)), Style::new().fg(t.err))),
+                Rect::new(inner.x, y, inner.width, 1),
+            );
+        }
+        (Some(p), None) => {
+            let ph = pair_height(p).min(inner.bottom().saturating_sub(y + 1));
+            prompt_pair(f, Rect::new(inner.x, y, inner.width, ph), p, t);
+        }
+        _ => {}
+    }
+    let mut keys = vec![
+        Span::raw(" "),
+        key("⏎", t),
+        Span::styled(" apply (u undoes)   ", t.dim()),
+        key("j/k", t),
+        Span::styled(" browse   ", t.dim()),
+        key("esc", t),
+        Span::styled(" close", t.dim()),
+    ];
+    if g.kind == GalleryKind::Saved {
+        keys.push(Span::styled("   ", t.dim()));
+        keys.push(key("d", t));
+        if g.confirm_delete {
+            keys.push(Span::styled(" press d again to delete this file", Style::new().fg(t.err).add_modifier(Modifier::BOLD)));
+        } else {
+            keys.push(Span::styled(" delete", t.dim()));
+        }
+    }
+    f.render_widget(Paragraph::new(Line::from(keys)), Rect::new(inner.x, inner.bottom() - 1, inner.width, 1));
+}
+
+fn welcome(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
+    let r = super::centered(area, 78, 19);
+    let inner = frame(f, r, "★", "welcome to custtymize", t);
+    let step = |n: &str, title: &str| {
+        Line::from(vec![
+            Span::styled(format!("  {n} "), Style::new().fg(t.bg).bg(t.accent).add_modifier(Modifier::BOLD)),
+            Span::styled(format!(" {title}"), t.title()),
+        ])
+    };
+    let text = |s: &str| Line::styled(format!("     {s}"), t.text());
+    let mut lines = vec![
+        Line::raw(""),
+        step("1", "DESIGN"),
+        Line::from(vec![
+            Span::raw("     "),
+            key("P", t),
+            Span::styled(" presets   ", t.text()),
+            key("T", t),
+            Span::styled(" themes   ", t.text()),
+            key("F", t),
+            Span::styled(" glyphs for your font   ", t.text()),
+            key("S", t),
+            Span::styled(" shape", t.text()),
+        ]),
+        text("or pick modules on the left and tweak them in the inspector."),
+        Line::raw(""),
+        step("2", "SAVE"),
+        Line::from(vec![
+            Span::raw("     "),
+            key("ctrl-s", t),
+            Span::styled(" shows before / after + diff; ", t.text()),
+            key("y", t),
+            Span::styled(" writes it (old one backed up).", t.text()),
+        ]),
+        Line::from(vec![
+            Span::raw("     "),
+            key(":save work", t),
+            Span::styled(" keeps extra designs; ", t.text()),
+            key("O", t),
+            Span::styled(" opens them later.", t.text()),
+        ]),
+        Line::raw(""),
+        step("3", "USE IT"),
+        Line::from(vec![
+            Span::styled("     add to ~/.zshrc:  ", t.text()),
+            Span::styled("eval \"$(custtymize init zsh)\"", Style::new().fg(t.ok).add_modifier(Modifier::BOLD)),
+        ]),
+        text("bash and fish work too: custtymize init bash | fish"),
+        Line::raw(""),
+    ];
+    if app.imported_from_starship() {
+        lines.push(Line::styled("  Your starship.toml was imported. It is never modified.", t.dim()));
+    }
+    lines.push(Line::from(vec![
+        Span::styled("  ", t.dim()),
+        key("P", t),
+        Span::styled(" browse presets now   ·   any other key to start   ·   ", t.dim()),
+        key("?", t),
+        Span::styled(" help any time", t.dim()),
+    ]));
+    f.render_widget(Paragraph::new(lines), inner);
 }

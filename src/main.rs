@@ -28,9 +28,15 @@ struct Cli {
     /// Print the generated TOML to stdout instead of opening the UI
     #[arg(long)]
     dry_run: bool,
-    /// Apply a palette preset before printing/opening (dracula, tokyo-night, catppuccin-mocha, gruvbox, phosphor, amber, …)
+    /// Apply a complete design first (neon-powerline, zen, plain-ascii, …; a theme name also works)
     #[arg(long, value_name = "NAME")]
     preset: Option<String>,
+    /// Apply a colour theme (dracula, tokyo-night, rose-pine, kanagawa, …)
+    #[arg(long, value_name = "NAME")]
+    theme: Option<String>,
+    /// Glyph set: nerd, unicode or ascii
+    #[arg(long, value_name = "SET")]
+    glyphs: Option<String>,
     /// Apply a segment shape (powerline, rounded, slanted, flat, plain)
     #[arg(long, value_name = "SHAPE")]
     shape: Option<String>,
@@ -230,6 +236,19 @@ fn run() -> Result<()> {
         None => None,
     };
     let base_model = loaded.model.clone();
+    if let Some(p) = &cli.preset {
+        match model::presets::find(p) {
+            Some(design) => loaded.model.apply_design(design),
+            None => {
+                let pal = model::palette::find(p).ok_or_else(|| Error::Msg(format!("unknown preset {p:?}")))?;
+                loaded.model.apply_palette(pal);
+            }
+        }
+    }
+    if let Some(g) = &cli.glyphs {
+        let g = model::Glyphs::parse(g).ok_or_else(|| Error::Msg(format!("unknown glyph set {g:?} (nerd, unicode, ascii)")))?;
+        loaded.model.set_glyphs(g);
+    }
     if let Some(s) = &cli.shape {
         let shape = model::Shape::parse(s).ok_or_else(|| Error::Msg(format!("unknown shape {s:?}")))?;
         loaded.model.set_shape(shape);
@@ -237,8 +256,8 @@ fn run() -> Result<()> {
             seg.format_override = None;
         }
     }
-    if let Some(p) = &cli.preset {
-        let pal = model::palette::find(p).ok_or_else(|| Error::Msg(format!("unknown preset {p:?}")))?;
+    if let Some(t) = &cli.theme {
+        let pal = model::palette::find(t).ok_or_else(|| Error::Msg(format!("unknown theme {t:?}")))?;
         loaded.model.apply_palette(pal);
     }
 
@@ -270,8 +289,9 @@ fn run() -> Result<()> {
         return Ok(());
     }
 
+    let first_run = !loaded.existed;
     let truecolor = if cli.ansi256 { false } else { cli.truecolor || detect_truecolor() };
-    // Edits made via --preset/--shape count as unsaved changes on top of the loaded file.
+    // Edits made via --preset/--theme/--glyphs/--shape count as unsaved changes on top of the loaded file.
     let edited = loaded.model.clone();
     loaded.model = base_model;
     let mut app = App::new(AppInit {
@@ -279,12 +299,13 @@ fn run() -> Result<()> {
         loaded,
         env: Some(env),
         imported,
+        first_run,
         sandbox_error,
         truecolor,
         skip_boot: cli.no_boot,
     });
     if edited != app.model {
-        app.replace_model(edited, "applied command-line --preset/--shape");
+        app.replace_model(edited, "applied command-line --preset/--theme/--glyphs/--shape");
     }
 
     let mut terminal = ratatui::try_init()?;

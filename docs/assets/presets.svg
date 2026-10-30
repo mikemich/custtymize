@@ -1,0 +1,560 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1103.2 760.24" width="1103.2" height="760.24" role="img" aria-label="custtymize — zsh — 128×38 terminal screenshot">
+<style>@font-face{font-family:T;src:url(data:font/woff2;base64,d09GMgABAAAAAB/sAA8AAAAASAQAAB+SAAJN0gAAAAAAAAAAAAAAAAAAAAAAAAAAGiIGYACCZAiBKAmcDBEICuZI1z8BNgIkA4FOC4FOAAQgBQYHIAyBVhukPkVGhI0DYEYUCMT/pwNOxuA17tUSFKEmqTrR6m40O+eMGo+hje4KFOt+iGc4juOfPnU97/wcdLRTLd67N/XFxxiL9tGgFhYsikgcpYhCbJReXcZORbEdR6G6ilLy9CYVT0dIMjs8buvfhoWR1yLKKRZYKIgMxqAVYw4ldgrSYmKfeVleNZepFx3yowP479+fX+5zquq+J/wIYwDSIDaRIrVM6j+hKewlY+rMQejliDly6nAyR9GnUO9aIivo4nuC3N0jBtoSKLE0gQxaEvmT53/qSm+gqIAUeMoP79gBOkCZDkEKSre+Leoryoy66snHx+u9F/EFUukrtszFsIyf9Z/m0PcvhyEuMSQFHBdGbGTnzIScNUtwbPHLMc3f3Gd1HaIGPL85oMAA4PzYtnYICgAd0SexAyFnmi3tAKGlle9hp6gCNNoqTIfqk47tae7zvUBhZvdO9YytsECWdoOHoFrOfZNtObGHYAvGADr8e51V6XvfduMSdC8ABRFTEm160deTZH19WW7ZapA1ZBjwsO0l97Bs751G3XtMEXKmcQ9oho8Ag2jDrQvCyyIKL8zugjA6G8MmiF+umsIBx3BWC01qRsiIMWlPXq4EIAAIR7BrGAQ4kQ4CHyUbJz/kOHTCBg0TCIAX2wAAmsMVIBOcwZbDACqFrWcCKNGcXfNMLKkAQFdJekT8+z8BdQhiq0wvBHCqfdNJks9qCgCMI0uHkwMg/A8dhwkEm5JlQIiISSgUK4fTmaaWR58hZ3iTNC75MRMwl5nMU2YK08Nc1q5un6S1fuh13EmjTs/9YtKPE38mLv2AJOlYRFGGmpT2sS3aL2xmLm1X3mbL/5/ter/3erd38jXW6171suc97lH3u9ftlvtbP+S9O5ilqcmSzH+H7fvUd89327ek7xIv5UfzI/nh/FCWNVkTXRYZBwSeJtkAJxclwKkAfyn86eXvzr380wiuDvsOb/anzj5MBZWEqToA2yaQy34Iu+zu+i9F1zf3Bv83OfgiAOLW1g5YvcLE5Srl9U/L6VX2P/ox4tUDmYdrLUNSjeRIaU08EpSqhwq9yUlgez7OySBadE4L6E6tuXuZKZkQ3pvE5kqTenpJxr0T0A1kLENHfnHSs54eesOO5ole0dz784OjJ7CaxPSJzroXEuLCHrs+1x6ewJusyIxWeBrkOkyjQgf+w+UzzH72/TrOelRTJqtpudv5ZeObVbw1nl6g5voucn5h3fyjQyqV0LG/6h08hI3LcWD414Ax4lOwwDY9KNtXS3uBzcKs552LPgCZ0+WIuLLE8cHUkFCVtba2HoerUEZAsVdCSue64EhR1ZUA92UypxiXUwA1yD10oOKWpQqG+ioprbNqeU5pcS4Q1yRVGqwnjXNKA2p4FPmqUHS13yPi8VX/HcQ03u/k2bb1WyrsOCtOO3D92pKiMo0uze5yKtBw2KPH06D3b4IREMEEsnJMqh6Pqrt8Awjc6HN0xaVcJsRfzx2U66vdvmz0ZkJYm/c6dsAJxlLOJVSiKK49kbtHHbsKdPYuYtUnG9m+ynWbebQ8KFdxmY9HocDuRETXCXzSKenUG5PetGW1Eu3e69YWILGexLehlZwhlgD5AVdoKDrP8R3DDrzCkFMhgqHaJRFXXKrYVTCiR7wzlceAJMZY3bOJ15V7Sa+RExCS5dt2dfdUUHqlkiumSJgp90WsbEIqDKPotFrD3KTgjGEbaUFAyx+ZLOiQo358AudK2NWSmV3MKRBgyqVe644B28lZcXTwVy9ePGiC3JGKRGKvJ9XLdy1DlqAn7VnGwaCmHwy9QJEb+MtyaSDT2Z3MGGMESONJRUqHIv8MV1+42pAjYX6oQsEISsaggVnQyDg0MQHNTEILU9DKNLQxs3QI4oK+lPnqnhUUpNcBw2d4eP1gnv64+chgb/rzY9aOjCSqupxUnJ+oBFTEDjTsRMMuNOxGwx407EXDPjTsR8MBNBxEq40CMzELY82eZY5SEFl6VVF5BIWtM46PiEt0jY/JBIAWDq1KmJDc3juQVAaASe1YTf5ACrqFONFNQudr+9Epak9ZqGew2jTwTfglM8jKHImtT4ridF9VxcIZnptUczKRpnVe3Y/JLDCDVgWP4OCzPofiwYz2nOahHZJTyWhfQGKy8ApF94kwYOrL8akNx5oAe6QS72cQTD+vOn/3fc5FEAssZoH7qUImJ1eO6HB4HEcDMBPny60sTaIguZIyGAQfvEsr7euX9pTbbVPKmuz2ijPJdq1NxC4kTxo/IjlipU942oYphtN3QsHQDcUuBCXSJ7uOaKUgSNhPJk2YUEKbDZlrKqNX6TFJKaY4pfdHSXi4OsL55JkczE1L0ZPpDuyE++WXzWHCMSWy4snMhHdwxaUNIhoivuTI/OpqVR/N2By8wY0tMCNaGScJ0WwOU5AO7LT88UXzY9eA1x0mQ9SH14TJ02PSf8bpqHXWy946JJQMya/kgnZL7TiLGVekcZ0bBtxy45E7amvuTfSekd7nLXAx8mzcBpdibN8UZq9mnIduomTB8STYcbEQornM+OsC3WC0pxgVkrUChUywaN1FsvvclBd3VP9DtIFMalEqe9cZmVA6ZKa0ExX2lmJraBhzH+B7SstMCgWsgAe5+ZFf7DHIxR3X0Gz39hzWj5CgdoFzUjkGFzSo9oaFWlCgiV2FwYo1Ypr7FavpBD2k6XjKFM5GSPCcqbwAw5ZdUoGrERK8Zlq+wSk2lubtTik8GyXB5ymVLx5swF4yZa+YstdM5Ru2WLM7TOweE3vAJB/BcIm9pTa8GyHB90ytD6JhxT6qF/g0SoKfU2p9KVTwa0rh2ygJfk/pxh9I2PGh9bOjwPWZ/oUb8rfd1YqbwrjDZ0Ng0JmBUl0ZCLpngIgw9qRFOD0tkr1Fu2Offof+DAQDGcgc/A2iOJRGcUYaxZlpFGfpBWZnIJiTgcy5NCjGeWkxzk+LcUFajAv1AosyECzOQLUl7JNhH26TjgfFnwyAKQpDMiOeYTS6tzke4jhOScGnb6/7ZAEByO9HwHNkHhz6l9BqADDmDJj8HvjUadbmHwTghDdmdA3HouWusGuEkDp3hN0o6PLtsLrLZUegjCLj8Lh8Ed/5MKqedAQ7Ge2G01POt2OVZ8LGdDw6alGbc9Wcu+7i/cucZuaerwenrj0eT9purJiP6NjT/amT+c0cW5qkRc88//2Z7pfPIh1wLK2t1O1T156Oc9vw/cl9P/0XmD8PxrP857gp5TEXNRo+YTfaetC6vtty7Z1xUfMRU5tMr5gxm86Mc9R11xBuOPsttr5E5tA6SjcqGEJu1r5jX6hYTP37BxqcZp+IGK0xeVL/swJzdhQgCjeQBigPkIUgvmZRq5UpZlzwqiz7+RSqW4iDazwJXCHld8+4xY7KRvvO4+ECzhJPuTJ1mjOhUOvfkdrkDv+jc6kKYYXeSWyNKsqWCM2NWnECXdGjRhc4+0aVEWw9tmI8oJ4Vt7D4jVx6zeLC7BNvumzapGRutWIEamUR2tfwpWW7y2Quw7p55U4VFNbVI2P3iJ1Fe/2UIgYKt9kpXL6YbtPmKRy1qjl5FXNVh6a8Cv3Kcplj10xwDJkTP3R2YoPXKNb6E0OrE6WL2RJPTTeeZtMvzWBqxcgFEbmE7CBx2WXKiDWLEhUiu5jYXlFKnwRxcC6hQEVPgZvGdqyF2DU1vr1T/bcSEcU67OgeLjNZmaUMQWvru0yvZVYGQlqcMjlQmzu/znGWxyZs1yXUHPVnKThD8cqzUJ7xHVVBZQV2z5FBtNZQHHlaqMC789EQuUA8GFKK4ylUgXbClxM+hxr3xFuqEceNxJNTifF2CSRa/SHiqJQJh2KwB5oNqOWGYbAxZqrSEwxrRjGUQA4FAdYiiLxSinfNcUTIRILiLlZ3QxZyjH2qX3Zcqf0y91Y1g9ggeCLUJu0Vd2RZePhG7ktUS8OE7fBmm+A609V0McwUFARkRsjXZNc3lJJbckeyq4CGqcz2hZN4A12lxhjyG8Rh5hXRPbt5MnhUNYxUY0XKqMFtM6CprcbE0P7y8GoMLbNtiDDq5zeKamclfGoptJx1Rb8+HTQ5G2KrTTdmgsemvMLnqGLeZS5SdZG6kF9qs1Zy7Td/uNpa4z0oFa0+Xm+ve+1A+Z08u+vz287fyqi0txUFI8nmG7WOCy8P8m0DdFhm5heEQ910+0zNJbUxIqirdFjKAZsFpQxdSA7RkOtnkjI1alM25UkNmgoRMzBhE0PRFW/dKpyWPOisqXhroEQD21yvx2ZA3ij/DvhuHEShzHeqoMkw5LuMJrooC66DGuTQ3pqPMt3IzJDOwkB/aUyyCbuSYZTrCqObim3e5poSJ2rKhBFG5SDrAfRag+hG7W6aYBcCItRn/3ZvlEKz6gu7Mt+pne0LTs7lwdDPQ8CN+lyEZZR0R8x8HPDJU21OP1OLumJZIg56p0j/vPgRFLlHzG9wfs4z3rFwKVf56CHuPX7CZrVhr//i540Wg058v2gw5KBmfwMarpOPsUs83GRQ0F1G0q25zjV8Od8MhEn/OFs32Bso7TtOyslV7VSzxl/FTswB+afZesw3AaFrkvfAIpuh0vv1IFGVBbTKvNuAOPSNM2eb6QdCrnlPKacqgYAjETbYfsB/Kvg/KNuRGJGm17/B+Y0YEdRVjYaIcGz49aDxKe9YsNqAl6MbfLhf844gHkLihEhaIrCvMtQFT4TEUIPW2b8MAH0Ha9a8nolg5RY+JkCgtBdxFunb7WtrYgnYcV1sJA9+HQY3hMGF70yJmXJ69IQPtYTYKWxt6jO9xMoYsUiallCy9J4693p5sd55LF4VOBLMcgaxJn/aszxxy4NNo5tursfp/zdpOQMVo+WcwdL+f9D9Hj0WWau1vfLRCg9nzhN6+M2D/KYbV/ArNwyNz7Ts2XZeXpMij7uEgWM4nUVlPkhmPmLO2ckPppQ0T8g/bG7tE1lUR3enFbM2y9GOl3DrrAXSUqG6VISJKC8ss5Cf4yNo8eHxz0+dFoGSxG3BrdWu3X39C3cSGTrtz5SbLH2mUK5EREo1SsLWng6bo7vNWsDvkKtuPiolCpKoji6PhRQqFMJZcurfhYryk5fYxKqqY+eNQa6WaRxLt0c27C1ZRj3sHH817ceT5O5cJuZnkCWUKQR3bPOIPOhyt6O5xZE1v20om6psECD1itxk++f7s+0jfMbVvERJHZ9nkyqRhnpEWSHBqxWKakua3zb+ZcqCCd3k3adV0DyCRVW4uYI6saLcJgmlLJUZBEVcXV2uGDPnFqdIAJWXUiShbkchDmuv5yqO8WUSLvcq8QvlKqcr8kxYRYlQZGI0JBK+QIobI3zGdiJJbOJzbVIV4nYjCpVbwiiTOJvzWJsz1k+duj6j8fLpe5ZLWYyNRyXpYNK4oRhufZFTZ5VWbcSP4kd+uGNyHr0+yMFKlAhS/wYkg9WDSmcB3ywtyiGruO1mYTzGeTiXxnovjk3LufbeJ0YScbbwQ79ZTaNxzP/sfKq9o9VaYm3CTvvxWEgUkyKIVIqWoFIdMIe0eBKQGt8llZPLt8iSZXwr7UJlrbBJS4qlyZL7c7Sl2X27Cc3H6Xh6gIbIcRNreWuJ+bPISP3xk4KmHUXWUfPlXtcB3F2ZNdtHLiwhEtW+eTVIHTLPpzfmwUOBs/K7ppd7WoOLA4/ZjNmkb/r7nkkBahhP2aQ3x9/zTKTEMTel1Pi+cU7vtFqv775zJXtwJaJUi1ClClnJyqE2DLZaSVGZHEOLVQJ2NnahhS6PK3cqBfn62lwRavLpt5XkyFAuV4Jy0vc3tCWq4/CW0rreNsT/5p74mri7kMGiOhs9llgyVihQSAlRCK3vibWhNeX7C2M1Az/eiNbzeLGGGz0/1F4cYzxsPvwbvjl8M56+tvn4a/bb4fR/qN5mKsvP0lRmcg+yGrsKfoshA7CWqhp7g1nXZ7TD7dWCXI20TFxY5mXb2dk352qoaIXQAblJH+mFBqBOXIRqLc3mHaaZ5Ckr+kfmlf9dVIgp0HVouWFjPtXe02pdZ/1y7OZOB6wnUyR8PqKUoutRpQzhS4qSSVjv+6qRMCphbTbtMFuatSgu6oSgAS/pI92Qo0KYWMYXE+ScyC/6W+6V/dPIolq6O12zXeXLtkjq8rm1mNVQIFIoBRwstY4MkXfgrzWAJpEqRSL56UrQN4u8hLdDUlmi3kHswAQdHxEfLcryjhCbc6qyOJCR4ikrQKotjaZOk6W5Gikr9MBmY6rWWWeMTuGdctdRCX+Qz7/JrTU+MgFyahCx1uIwtJM2FJXy+JgCM2VZfOR698aPXccDzye6t//a+FveQLGuSvndZWKSeKou6SCRLkwtL4blEakpk3dBNmoqFy0X76zaxfidFv8bY3eJPhxPe1ddTSrp5nKCVRxfygq2dXbUD7k72u32y3MP1QNt1gpEKsFWYdtHBLI2pyVZ00aMtw7VWprMZh2vENkpr6znDx/9RdZ7Ukk3bNeIMF2N05xD5kzvQkQyzESOD66xE6VkKpnH5jSmq7CQ9eN7RKVitbVSz8bt5eJpNGYGO7soRaBaFrckbrjMXlWD2OSV5VLZNmLbZnLzR8RHMhoc7yW4mVRzm8diIk1CsbKQjymFVqKlw5Py03mmpafN+28u9u7wFGYgkdFrZJYXzmFWgWg5Vz6HPL8rXDuIrmIWzSmpZdrQfqQlGjzWSPrTONennA5taDrQcK8w7V6NPx12bXJD10jDQzX/277yY0k9MYK/ekixzNJ2vJOT845tutYcMzaVJPN72cRKsqhXQbAV/ysRlVLAnDxh79i4nEJltblMqUJODfXUzQuSl76Ny6YuWzo8nDy4JvLtH09QNXFj9jGC+vIckWYcIQZQuUx0KoAwBVt62hxM1kJGZQKdYDAIekJl2lTcgNNpebm0o3lP6Zt4cDJ/4OLPOPJKo+qgN3Zf080zojixfaad/tcKEPjj2+vKxajYPmSPxJIcb5W4CHmRTzNN86kqLwIq/Bl86CI2rNM6ku3JKregqLH4wxRYFOuleoGaPOdabYRwkRMn3iPq+tJD+8Mk7mlxpqjFjnUACqiknOQWqNakskGlv8mJs7zbLjNuXBW+90IT/keB9PTngK5Ro2+vyoXUgQ9uvht/yPYZTdlTbzebap5dbm13/gfgjNCmlSBJmy1VsC8kpNCNrC0scwp5RbFFDb7N6ZKKuWzajgl707Sr9aJd/cHSyy5Ygn3UlGB+yTyfACo9eG4n+eD7q+0a6R78gf1wK67b6okYReyJS8Rob8+Qt+KKBR/NMyzF8aUGI75EHTMYl+CO0QBxap+UML9hfsv++U2HS0fOvB9by6RLrG1xzizs/zf6wkTzNM3F7j3X+Vi7321BOt5c1MYYVMNb7V9vA7AczsQ3luWZ4GZe88uuAmA5BQTyMleus2Rc7B/KuLzGtBowU+BVa2szLv29F601r4L8n/7/z1X0jYlLEta/HpeZOXrmJKNwVdzdqb+3x2hiVFHq4xxpip55ZcKPYdY/wW/DjMNx6ly+JFWXsoq+ib64YEVm8ThVHI83HOej/XJK9NOlST+G0z/JzwiQcEEbAgP4iqb2EHMzDOA5mkUVMXH6XdcUV4qvWGBwpdZ2rPaY6wQ3RBBdCelDebW7Zvz117rIsg9ZPzbiuvBAf8EIBwA4BgYxcAzwCZcxvxokwvdVSqXq/rIVwOZY4Hzhm5w/jx2rg/4Bnb7/FP403Q9f0DPJb4Zt0rXxU0ZO7Fjr0dyJAtetOioiujoqeuOB6HC6VaEYmjE0qJA5aeH9sFlEOOUhsALN/hWDY7VcASx0vNFLWeRO7O3F+JsU2f9VIN1EL/hGoTF6QfxEAem9zbY5tEeLwhteccjsw8/GdhRGVU03sTv3EJykH9PP9V+/wzf4o5ZRxy+v0H9+l9+h1GP99PnTAXdYVwAHXhFS3CdCi5RC16HvWhHElpAHQzgmSSyAL1UQ4WXJftHXKmE8yC0Rgg9L88P7Esqx0dsKP5oOrPHQjMSqKfNLlTFho9HMqeH/Kuzp0ISmxjD4z4uZMOszpLYh9MzVpHiVBVr1vUKfUZhTXzfl6V8whEi26vRCVHmB/ZSoT56PYSrfh1B8hVqELei6PkcdGDHi+U0L5mRo3QSnf6gCWljSM1SfPG8Cifv9BZQblgV65RjDBI7SnxKXFjyHWnTFSKMJ+yc5AH74BtJ3cPo8IXqlKy8cMrRky2crQTbLRuezPz8zCPG+znTIBt8lzWEiSqaaDuh+b7viEUhXkL5U0YJ4mIqYWTUwZLiVmpw5GsILUUAeiECxBrzEfta/Q7moZs44Vswhyryyet4ctwp6e0aA8r1CpDL0/OWUH5NZC6q+VIGoBxa7iWUSr28ZnFKzEvGAJ82yQ1cwpHl0DnLVvSLiZLV+4U9QOOQ1jVCLFVW5IJPdQCf3Z9uYzzqhJr32ZkjpcnGG822HF/HUdDkH++MKZ01e6Zctg549ygStH5VEV/9E7CQGVpLfmHAx9aXKpEtPng8N2Hm1NQ+kdT39VmTx5/3hdaysK51Mpcu/pvgzythHP5Jnn8Onx6ab+aatszEfDR1n1PJTvxIRfY9NAQ4uyCRD4xFmSw72QSMHsj7U24jDxKEpLUBDLwxeeG43k7HYidTCK+ISmzYIdvKRxuxY+BHPKF11YOWT0FeA4rg2R3vqi+nWsUlIdDHRmNyRcQEpGa1whO9P7Y7rmZAdz7RKHAdYN9qNB9h1lNEiLb5VJHGBZN0+0Fote1W9OLjtHvY1aOs5eY7uvgs4a3Qrr4QUqeI3pRRdBxsnlOgKiZV+lNw+Ky4szaiGQU9HtxWZvAcr97BwF2r9iFihx/sw1L7iqPQc4o2GfQtDpswmPJs6XTvDakz67CW6y4jhu8XIv2CBEa8XKzKtm5mu3lnNRL1fhV2QxuSO3mCXTx3lUG/NUK4s4kv5clbYMGa8FcPnEtZKdR9GUFE9qSjJBlPLvOFGhNkgnkB4Lc3TafD1O0hyc/SKcg/bGtyJbKzbQhR5I2OPAxZyaEWm4nmOd3Un0pyk5b+vg+f/xHt4qTLvsHqRqmJJxLNXO2+OQs859cM0UMwcsLgwxugUeJhxsjSonlQGcvZ0Muwr2aIwovNyjRQyDEQmzB2Wd9oCAj6VAX4ECmwYA8Ao3BprjiXJLg9BQKZCk/6fO11Tt8LOJZkvXJXUGsvqfXozT55foFdA1QzF7TV9QXOMzxIK72lPurTzPdsk/jh+0X7avx3OksNKAy5r+kUvXBVy17Qa86gSZAVIM7h84+j7+27SHXMrr1I/ZPi7lKbr3kbZHXiBBL3PyAadIN1G7JAVey6eQfwx0cqNnuAOZ2yLs7yitXkoItRFIv9eyXUsQ3PHD6jQlI1nqUQTK9FHcLKg1mayBrYRR1ZZdx6/zenQf6ZYNcWuUPRU6DPWBa15GbJfuAqQi06Zz/AVaqBqEU9VoFFMlBEPfZ4C3t+VTtkEzWhK2/7nwinIQRFumD8wvK+xi7TLbiJOE0s2wc3vqeQSahM0mWp4kWy2p/Gwa5VMNKmYOyHS9Zpn2i3DU5XYVX3bW4zoIwAUiWqcT56jId53DHXZm7WNKZmzoaN2Ol3LdhVq4ikF/ZPnfaLdVH9jc9RO4Qkur5wBL/bdmIr9VG8KmrTUiLWIaAhNi2JOHlE9tPS5it++WqUYRnB2A+METgZIMNEjb0Q0Rzp+uggWGc61rtrnK/6ZyNYHVdZh9PM5O0g6e8y8N3sh9eJVmsLAs6VTP0R9N7jEcvywNOSFa4flUh523qfxURsNB30MjO1QovVsfOc8ddtP1ZpjIrdVevTMcBmY4vxYHAWBes+odzSlpBbYTF3tAEUcWO8k78gcU89cPGFyGE+ODchmQ8MD9fyf5SsGh7sdEfxVbuVXX143p6d/GJsgRV6gCM2R4sutHIpbJ8+PMBLnuqkUqliDMFCSvfZN5iYnaOquraY+0Fby8q9Af9T0l58f2stvStPYDEFSYgY+cWvymVuvWkMV5GIALVLPXGfCeCspt8EEAs2/37yBuDmREM/mq9Hn+3hEM/KYWJSvbMP8BiLJJ3uqoFaEHfdTZTl8fWtfob2yeXnaI3WU3b5boaxdJTOmotKtpa8uWuG39X0m9KPj5YeDD6bSIFo9PXVT/tQfIVv3rfTy8iYbJA+mbiqMUQAeDVEqg5r8kR4jzAtLJHczrMbf3c1KAkN2sLRk6lAJE37o2pRcL+/a7tTxbgfU6DGDT7apYm7mXi40DWXrwWq9rbnQhVBf+I4YdGxoIwh92jjJQlcQzylq2yoXWFfwTeTnvr1Jy8MhIMBX//ffWcPlgjz9v0+teL8EAPDBl84FAABfhHY9/n9/jweyDgCCgAEAAAjw94Yd2BAw1LtvBAg8fzMg2AAJgI/ACpL95RwdJJ6DpfiABo5USklJA0OQwoyBR6DabDhq1LBzqwFOViO5YhYOkxNUWoesrzbQq4JNg3njatUs6IRm1WV6oNk5SDyJOEorSckH3KANfwP+b4+yvzEHNfUOeg4Lxfp/Zx2rSexdUFWg/J8qfUMA4IyztJgCBobXxO9gGSCwTjJgA5waBGId8DsAB63Tc/eah7tEP0HQ8jnpr5scYJ5AsPT3AJLCCAQfWT7M8+HlqUxen9pP6gJDexcgXGK0ZbfE+tl/uPTvydWYqxFXB1cbRiAYNYiZAfZC5YB/AgpAfrqhhTft8fX/t13wVdbvn9VgJpjqiD/RHxrO65lAAaHTj3vr6HnMWDhutfktvU2pwMjMP1L+Hx7PZb9yROsV9gZebgAA) format('woff2');font-weight:400}@font-face{font-family:T;src:url(data:font/woff2;base64,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) format('woff2');font-weight:700}text{font-family:T,'JetBrainsMono Nerd Font',monospace;font-size:14px;white-space:pre}</style>
+<rect width="1103.2" height="760.24" rx="10" fill="#282a36"/>
+<rect width="1103.2" height="30" rx="10" fill="#1e1f29"/><rect y="20" width="1103.2" height="10" fill="#1e1f29"/>
+<circle cx="18" cy="15.0" r="6" fill="#ff5555"/>
+<circle cx="38" cy="15.0" r="6" fill="#f1fa8c"/>
+<circle cx="58" cy="15.0" r="6" fill="#50fa7b"/>
+<text x="551.60" y="19.5" fill="#6272a4" text-anchor="middle" style="font-size:12px">custtymize — zsh — 128×38</text>
+<rect x="14.00" y="44.00" width="25.60" height="18.88" fill="#1b1c25"/>
+<rect x="39.20" y="44.00" width="101.20" height="18.88" fill="#bd93f9"/>
+<rect x="140.00" y="44.00" width="941.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="62.48" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="22.40" y="62.48" width="25.60" height="18.88" fill="#ff79c6"/>
+<rect x="47.60" y="62.48" width="67.60" height="18.88" fill="#1f202a"/>
+<rect x="114.80" y="62.48" width="25.60" height="18.88" fill="#ff79c6"/>
+<rect x="140.00" y="62.48" width="126.40" height="18.88" fill="#1f202a"/>
+<rect x="266.00" y="62.48" width="25.60" height="18.88" fill="#ff79c6"/>
+<rect x="291.20" y="62.48" width="151.60" height="18.88" fill="#1f202a"/>
+<rect x="442.40" y="62.48" width="25.60" height="18.88" fill="#ff79c6"/>
+<rect x="467.60" y="62.48" width="143.20" height="18.88" fill="#1f202a"/>
+<rect x="610.40" y="62.48" width="25.60" height="18.88" fill="#ff79c6"/>
+<rect x="635.60" y="62.48" width="67.60" height="18.88" fill="#1f202a"/>
+<rect x="702.80" y="62.48" width="25.60" height="18.88" fill="#ff79c6"/>
+<rect x="728.00" y="62.48" width="67.60" height="18.88" fill="#1f202a"/>
+<rect x="795.20" y="62.48" width="25.60" height="18.88" fill="#ff79c6"/>
+<rect x="820.40" y="62.48" width="59.20" height="18.88" fill="#1f202a"/>
+<rect x="879.20" y="62.48" width="25.60" height="18.88" fill="#ff79c6"/>
+<rect x="904.40" y="62.48" width="76.00" height="18.88" fill="#1f202a"/>
+<rect x="980.00" y="62.48" width="34.00" height="18.88" fill="#ff79c6"/>
+<rect x="1013.60" y="62.48" width="42.40" height="18.88" fill="#1f202a"/>
+<rect x="14.00" y="80.96" width="1075.60" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="99.44" width="101.20" height="18.88" fill="#1b1c25"/>
+<rect x="114.80" y="99.44" width="92.80" height="18.88" fill="#bd93f9"/>
+<rect x="207.20" y="99.44" width="202.00" height="18.88" fill="#ff79c6"/>
+<rect x="408.80" y="99.44" width="50.80" height="18.88" fill="#8be9fd"/>
+<rect x="459.20" y="99.44" width="109.60" height="18.88" fill="#50fa7b"/>
+<rect x="568.40" y="99.44" width="202.00" height="18.88" fill="#ffb86c"/>
+<rect x="770.00" y="99.44" width="59.20" height="18.88" fill="#f1fa8c"/>
+<rect x="971.60" y="99.44" width="101.20" height="18.88" fill="#6272a4"/>
+<rect x="1080.80" y="99.44" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="117.92" width="1075.60" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="136.40" width="101.20" height="18.88" fill="#1b1c25"/>
+<rect x="114.80" y="136.40" width="92.80" height="18.88" fill="#bd93f9"/>
+<rect x="207.20" y="136.40" width="202.00" height="18.88" fill="#ff79c6"/>
+<rect x="408.80" y="136.40" width="50.80" height="18.88" fill="#8be9fd"/>
+<rect x="459.20" y="136.40" width="109.60" height="18.88" fill="#50fa7b"/>
+<rect x="568.40" y="136.40" width="202.00" height="18.88" fill="#ffb86c"/>
+<rect x="770.00" y="136.40" width="59.20" height="18.88" fill="#f1fa8c"/>
+<rect x="971.60" y="136.40" width="101.20" height="18.88" fill="#6272a4"/>
+<rect x="1080.80" y="136.40" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="154.88" width="1075.60" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="173.36" width="1075.60" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="191.84" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="191.84" width="17.20" height="18.88" fill="#343746"/>
+<rect x="39.20" y="191.84" width="1050.40" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="210.32" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="210.32" width="17.20" height="18.88" fill="#1f202a"/>
+<rect x="39.20" y="210.32" width="1025.20" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="210.32" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="210.32" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="210.32" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="228.80" width="1050.40" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="228.80" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="228.80" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="247.28" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="247.28" width="17.20" height="18.88" fill="#1f202a"/>
+<rect x="39.20" y="247.28" width="1025.20" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="247.28" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="247.28" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="247.28" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="265.76" width="1050.40" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="265.76" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="265.76" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="284.24" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="284.24" width="17.20" height="18.88" fill="#1f202a"/>
+<rect x="39.20" y="284.24" width="1025.20" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="284.24" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="284.24" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="284.24" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="302.72" width="1050.40" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="302.72" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="302.72" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="321.20" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="321.20" width="17.20" height="18.88" fill="#1f202a"/>
+<rect x="39.20" y="321.20" width="1025.20" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="321.20" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="321.20" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="321.20" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="339.68" width="34.00" height="18.88" fill="#1b1c25"/>
+<rect x="47.60" y="339.68" width="899.20" height="18.88" fill="#44475a"/>
+<rect x="946.40" y="339.68" width="118.00" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="339.68" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="339.68" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="358.16" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="358.16" width="17.20" height="18.88" fill="#1f202a"/>
+<rect x="39.20" y="358.16" width="1025.20" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="358.16" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="358.16" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="358.16" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="376.64" width="1050.40" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="376.64" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="376.64" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="395.12" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="395.12" width="17.20" height="18.88" fill="#1f202a"/>
+<rect x="39.20" y="395.12" width="1025.20" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="395.12" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="395.12" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="395.12" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="413.60" width="1050.40" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="413.60" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="413.60" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="432.08" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="432.08" width="17.20" height="18.88" fill="#1f202a"/>
+<rect x="39.20" y="432.08" width="1025.20" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="432.08" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="432.08" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="432.08" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="450.56" width="1050.40" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="450.56" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="450.56" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="469.04" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="469.04" width="17.20" height="18.88" fill="#1f202a"/>
+<rect x="39.20" y="469.04" width="1025.20" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="469.04" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="469.04" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="469.04" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="487.52" width="126.40" height="18.88" fill="#1b1c25"/>
+<rect x="148.40" y="487.52" width="92.80" height="18.88" fill="#ff2a6d"/>
+<rect x="266.00" y="487.52" width="193.60" height="18.88" fill="#d300c5"/>
+<rect x="484.40" y="487.52" width="42.40" height="18.88" fill="#7700ff"/>
+<rect x="551.60" y="487.52" width="101.20" height="18.88" fill="#05d9e8"/>
+<rect x="677.60" y="487.52" width="193.60" height="18.88" fill="#fee440"/>
+<rect x="1055.60" y="487.52" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="487.52" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="487.52" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="506.00" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="506.00" width="17.20" height="18.88" fill="#1f202a"/>
+<rect x="39.20" y="506.00" width="101.20" height="18.88" fill="#1b1c25"/>
+<rect x="148.40" y="506.00" width="92.80" height="18.88" fill="#ff2a6d"/>
+<rect x="266.00" y="506.00" width="193.60" height="18.88" fill="#d300c5"/>
+<rect x="484.40" y="506.00" width="42.40" height="18.88" fill="#7700ff"/>
+<rect x="551.60" y="506.00" width="101.20" height="18.88" fill="#05d9e8"/>
+<rect x="677.60" y="506.00" width="193.60" height="18.88" fill="#fee440"/>
+<rect x="1055.60" y="506.00" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="506.00" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="506.00" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="506.00" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="524.48" width="1050.40" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="524.48" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="524.48" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="542.96" width="1050.40" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="542.96" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="542.96" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="561.44" width="1050.40" height="18.88" fill="#1b1c25"/>
+<rect x="1064.00" y="561.44" width="8.80" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="561.44" width="17.20" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="579.92" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="579.92" width="25.60" height="18.88" fill="#1f202a"/>
+<rect x="47.60" y="579.92" width="1025.20" height="18.88" fill="#343746"/>
+<rect x="1072.40" y="579.92" width="8.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="579.92" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="598.40" width="1075.60" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="616.88" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="616.88" width="1058.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="616.88" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="635.36" width="1075.60" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="653.84" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="653.84" width="1058.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="653.84" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="672.32" width="1075.60" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="690.80" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="22.40" y="690.80" width="1058.80" height="18.88" fill="#1f202a"/>
+<rect x="1080.80" y="690.80" width="8.80" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="709.28" width="1075.60" height="18.88" fill="#1b1c25"/>
+<rect x="14.00" y="727.76" width="76.00" height="18.88" fill="#8be9fd"/>
+<rect x="89.60" y="727.76" width="991.60" height="18.88" fill="#1f202a"/>
+<text x="14.00 22.40 30.80" y="58.28" fill="#bd93f9">▓▒░</text>
+<text x="39.20 47.60 56.00 64.40 72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60" y="58.28" fill="#1b1c25" font-weight="700"> CUSTTYMIZE </text>
+<text x="140.00 148.40 156.80" y="58.28" fill="#bd93f9">░▒▓</text>
+<text x="165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20" y="58.28" fill="#6272a4">  shell prompt forge </text>
+<text x="341.60 350.00 358.40" y="58.28" fill="#343746">// </text>
+<text x="366.80 375.20 383.60 392.00 400.40 408.80" y="58.28" fill="#6272a4">v0.1.0</text>
+<text x="736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60" y="58.28" fill="#6272a4">engine v0.1.0 </text>
+<text x="854.00 862.40" y="58.28" fill="#343746">│ </text>
+<text x="870.80 879.20 887.60 896.00 904.40 912.80" y="58.28" fill="#6272a4">24bit </text>
+<text x="921.20 929.60" y="58.28" fill="#343746">│ </text>
+<text x="938.00" y="58.28" fill="#50fa7b">●</text>
+<text x="946.40 954.80 963.20 971.60 980.00 988.40" y="58.28" fill="#6272a4"> LINK </text>
+<text x="996.80 1005.20" y="58.28" fill="#343746">│ </text>
+<text x="1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40" y="58.28" fill="#8be9fd">17:25:13</text>
+<text x="22.40 30.80 39.20" y="76.76" fill="#1b1c25" font-weight="700"> P </text>
+<text x="47.60 56.00 64.40 72.80 81.20 89.60 98.00 106.40" y="76.76" fill="#f8f8f2"> preset </text>
+<text x="114.80 123.20 131.60" y="76.76" fill="#1b1c25" font-weight="700"> T </text>
+<text x="140.00 148.40 156.80 165.20 173.60 182.00" y="76.76" fill="#f8f8f2"> theme</text>
+<text x="190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20" y="76.76" fill="#8be9fd"> dracula</text>
+<text x="266.00 274.40 282.80" y="76.76" fill="#1b1c25" font-weight="700"> F </text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60" y="76.76" fill="#f8f8f2"> glyphs</text>
+<text x="350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60" y="76.76" fill="#8be9fd"> nerd font</text>
+<text x="442.40 450.80 459.20" y="76.76" fill="#1b1c25" font-weight="700"> S </text>
+<text x="467.60 476.00 484.40 492.80 501.20 509.60" y="76.76" fill="#f8f8f2"> shape</text>
+<text x="518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60" y="76.76" fill="#8be9fd"> powerline</text>
+<text x="610.40 618.80 627.20" y="76.76" fill="#1b1c25" font-weight="700"> L </text>
+<text x="635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40" y="76.76" fill="#f8f8f2"> layout </text>
+<text x="702.80 711.20 719.60" y="76.76" fill="#1b1c25" font-weight="700"> g </text>
+<text x="728.00 736.40 744.80 753.20 761.60" y="76.76" fill="#f8f8f2"> more</text>
+<text x="770.00 778.40 786.80" y="76.76" fill="#343746"> │ </text>
+<text x="795.20 803.60 812.00" y="76.76" fill="#1b1c25" font-weight="700"> O </text>
+<text x="820.40 828.80 837.20 845.60 854.00 862.40 870.80" y="76.76" fill="#f8f8f2"> saved </text>
+<text x="879.20 887.60 896.00" y="76.76" fill="#1b1c25" font-weight="700"> B </text>
+<text x="904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60" y="76.76" fill="#f8f8f2"> backups </text>
+<text x="980.00 988.40 996.80 1005.20" y="76.76" fill="#1b1c25" font-weight="700"> ^S </text>
+<text x="1013.60 1022.00 1030.40 1038.80 1047.20" y="76.76" fill="#f8f8f2"> save</text>
+<text x="14.00 22.40" y="95.24" fill="#44475a">╭┤</text>
+<text x="30.80 39.20 47.60 56.00" y="95.24" fill="#343746"> 00 </text>
+<text x="64.40 72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80" y="95.24" fill="#6272a4" font-weight="700">LIVE PREVIEW</text>
+<text x="165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60" y="95.24" fill="#44475a"> ├───────────────────────────────────────────────────────────────────────────</text>
+<text x="828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00" y="95.24" fill="#6272a4"> dirty repo · 18ms </text>
+<text x="988.40" y="95.24" fill="#ff79c6">s</text>
+<text x="996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40" y="95.24" fill="#343746">:scenario </text>
+<text x="1080.80" y="95.24" fill="#44475a">╮</text>
+<text x="14.00" y="113.72" fill="#44475a">│</text>
+<text x="22.40 30.80 39.20 47.60 56.00 64.40 72.80" y="113.72" fill="#50fa7b" font-weight="700"> ✔ $?=0</text>
+<text x="114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80" y="113.72" fill="#282a36" font-weight="700"> neon-city </text>
+<text x="207.20" y="113.72" fill="#bd93f9"></text>
+<text x="215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40" y="113.72" fill="#282a36">  feature/neon-dreams </text>
+<text x="408.80" y="113.72" fill="#ff79c6"></text>
+<text x="417.20 425.60 434.00 442.40 450.80" y="113.72" fill="#282a36"> !+? </text>
+<text x="459.20" y="113.72" fill="#8be9fd"></text>
+<text x="467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00" y="113.72" fill="#282a36">  v26.10.0 </text>
+<text x="568.40" y="113.72" fill="#50fa7b"></text>
+<text x="576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60" y="113.72" fill="#282a36">  v3.15.1 (neon-venv) </text>
+<text x="770.00" y="113.72" fill="#ffb86c"></text>
+<text x="778.40 786.80 795.20 803.60 812.00 820.40" y="113.72" fill="#282a36">  4s </text>
+<text x="828.80" y="113.72" fill="#f1fa8c"></text>
+<text x="845.60" y="113.72" fill="#50fa7b" font-weight="700">❯</text>
+<text x="879.20" y="113.72" fill="#343746">·</text>
+<text x="912.80" y="113.72" fill="#343746">·</text>
+<text x="946.40" y="113.72" fill="#343746">·</text>
+<text x="963.20" y="113.72" fill="#6272a4"></text>
+<text x="971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40" y="113.72" fill="#f8f8f2">  17:25:07  </text>
+<text x="1080.80" y="113.72" fill="#44475a">│</text>
+<text x="14.00" y="132.20" fill="#44475a">│</text>
+<text x="22.40 30.80 39.20 47.60 56.00 64.40 72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40" y="132.20" fill="#343746">┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄</text>
+<text x="1080.80" y="132.20" fill="#44475a">│</text>
+<text x="14.00" y="150.68" fill="#44475a">│</text>
+<text x="22.40 30.80 39.20 47.60 56.00 64.40 72.80" y="150.68" fill="#ff5555" font-weight="700"> ✘ $?=1</text>
+<text x="114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80" y="150.68" fill="#282a36" font-weight="700"> neon-city </text>
+<text x="207.20" y="150.68" fill="#bd93f9"></text>
+<text x="215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40" y="150.68" fill="#282a36">  feature/neon-dreams </text>
+<text x="408.80" y="150.68" fill="#ff79c6"></text>
+<text x="417.20 425.60 434.00 442.40 450.80" y="150.68" fill="#282a36"> !+? </text>
+<text x="459.20" y="150.68" fill="#8be9fd"></text>
+<text x="467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00" y="150.68" fill="#282a36">  v26.10.0 </text>
+<text x="568.40" y="150.68" fill="#50fa7b"></text>
+<text x="576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60" y="150.68" fill="#282a36">  v3.15.1 (neon-venv) </text>
+<text x="770.00" y="150.68" fill="#ffb86c"></text>
+<text x="778.40 786.80 795.20 803.60 812.00 820.40" y="150.68" fill="#282a36">  4s </text>
+<text x="828.80" y="150.68" fill="#f1fa8c"></text>
+<text x="845.60" y="150.68" fill="#ff5555" font-weight="700">❯</text>
+<text x="879.20" y="150.68" fill="#343746">·</text>
+<text x="912.80" y="150.68" fill="#343746">·</text>
+<text x="946.40" y="150.68" fill="#343746">·</text>
+<text x="963.20" y="150.68" fill="#6272a4"></text>
+<text x="971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40" y="150.68" fill="#f8f8f2">  17:25:07  </text>
+<text x="1080.80" y="150.68" fill="#44475a">│</text>
+<text x="14.00 22.40 30.80 39.20 47.60 56.00 64.40 72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40 1080.80" y="169.16" fill="#44475a">╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</text>
+<text x="14.00 22.40" y="187.64" fill="#44475a">╭┤</text>
+<text x="30.80 39.20 47.60 56.00" y="187.64" fill="#343746"> 01 </text>
+<text x="64.40 72.80 81.20 89.60 98.00 106.40 114.80" y="187.64" fill="#6272a4" font-weight="700">MODULES</text>
+<text x="123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00" y="187.64" fill="#44475a"> ├────────────────────╮</text>
+<text x="316.40 324.80" y="187.64" fill="#bd93f9">╭┤</text>
+<text x="333.20 341.60 350.00 358.40" y="187.64" fill="#ff79c6"> 02 </text>
+<text x="366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20" y="187.64" fill="#bd93f9" font-weight="700">INSPECTOR :: DIRECTORY</text>
+<text x="551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40 1080.80" y="187.64" fill="#bd93f9"> ├─────────────────────────────────────────────────────────────╮</text>
+<text x="14.00" y="206.12" fill="#44475a">│</text>
+<text x="22.40" y="206.12" fill="#ff79c6">▌</text>
+<text x="30.80" y="206.12" fill="#343746">0</text>
+<text x="39.20 47.60" y="206.12" fill="#bd93f9">╭┤</text>
+<text x="56.00 64.40 72.80" y="206.12" fill="#ff79c6"> P </text>
+<text x="81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80" y="206.12" fill="#bd93f9" font-weight="700">PRESETS // COMPLETE PROMPT DESIGNS // 8 OF 12</text>
+<text x="459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60" y="206.12" fill="#bd93f9"> ├─────────────────────────────────────────────────────────────────────╮</text>
+<text x="1080.80" y="206.12" fill="#bd93f9">│</text>
+<text x="14.00" y="224.60" fill="#44475a">│</text>
+<text x="30.80" y="224.60" fill="#343746">0</text>
+<text x="39.20" y="224.60" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="224.60" fill="#f8f8f2">neon-powerline    </text>
+<text x="224.00" y="224.60" fill="#bd93f9">▮</text>
+<text x="232.40" y="224.60" fill="#ff79c6">▮</text>
+<text x="240.80" y="224.60" fill="#8be9fd">▮</text>
+<text x="249.20" y="224.60" fill="#50fa7b">▮</text>
+<text x="257.60" y="224.60" fill="#ffb86c">▮</text>
+<text x="266.00" y="224.60" fill="#f1fa8c">▮</text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60" y="224.60" fill="#6272a4">Dracula powerline with a gradient cap: the custtymize look · powerline · nerd font</text>
+<text x="1055.60" y="224.60" fill="#bd93f9">│</text>
+<text x="1080.80" y="224.60" fill="#bd93f9">│</text>
+<text x="14.00" y="243.08" fill="#44475a">│</text>
+<text x="30.80" y="243.08" fill="#343746">0</text>
+<text x="39.20" y="243.08" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="243.08" fill="#f8f8f2">pastel-pills      </text>
+<text x="224.00" y="243.08" fill="#cba6f7">▮</text>
+<text x="232.40" y="243.08" fill="#f38ba8">▮</text>
+<text x="240.80" y="243.08" fill="#fab387">▮</text>
+<text x="249.20" y="243.08" fill="#f9e2af">▮</text>
+<text x="257.60" y="243.08" fill="#a6e3a1">▮</text>
+<text x="266.00" y="243.08" fill="#94e2d5">▮</text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60" y="243.08" fill="#6272a4">Catppuccin rounded pills on one line, prompt below · rounded · nerd font</text>
+<text x="1055.60" y="243.08" fill="#bd93f9">│</text>
+<text x="1080.80" y="243.08" fill="#bd93f9">│</text>
+<text x="14.00" y="261.56" fill="#44475a">│</text>
+<text x="30.80" y="261.56" fill="#343746">0</text>
+<text x="39.20" y="261.56" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="261.56" fill="#f8f8f2">tokyo-slant       </text>
+<text x="224.00" y="261.56" fill="#7aa2f7">▮</text>
+<text x="232.40" y="261.56" fill="#bb9af7">▮</text>
+<text x="240.80" y="261.56" fill="#7dcfff">▮</text>
+<text x="249.20" y="261.56" fill="#9ece6a">▮</text>
+<text x="257.60" y="261.56" fill="#e0af68">▮</text>
+<text x="266.00" y="261.56" fill="#f7768e">▮</text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00" y="261.56" fill="#6272a4">Tokyo Night slanted segments with the clock on the right · slanted · nerd font</text>
+<text x="1055.60" y="261.56" fill="#bd93f9">│</text>
+<text x="1080.80" y="261.56" fill="#bd93f9">│</text>
+<text x="14.00" y="280.04" fill="#44475a">│</text>
+<text x="30.80" y="280.04" fill="#343746">0</text>
+<text x="39.20" y="280.04" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="280.04" fill="#f8f8f2">zen               </text>
+<text x="224.00" y="280.04" fill="#c4a7e7">▮</text>
+<text x="232.40" y="280.04" fill="#ebbcba">▮</text>
+<text x="240.80" y="280.04" fill="#9ccfd8">▮</text>
+<text x="249.20" y="280.04" fill="#f6c177">▮</text>
+<text x="257.60" y="280.04" fill="#31748f">▮</text>
+<text x="266.00" y="280.04" fill="#eb6f92">▮</text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60" y="280.04" fill="#6272a4">Minimal two-line text prompt: path and branch, nothing else · plain text · unicode</text>
+<text x="1055.60" y="280.04" fill="#bd93f9">│</text>
+<text x="1080.80" y="280.04" fill="#bd93f9">│</text>
+<text x="14.00" y="298.52" fill="#44475a">│</text>
+<text x="30.80" y="298.52" fill="#343746">0</text>
+<text x="39.20" y="298.52" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="298.52" fill="#f8f8f2">one-liner         </text>
+<text x="224.00" y="298.52" fill="#5e81ac">▮</text>
+<text x="232.40" y="298.52" fill="#81a1c1">▮</text>
+<text x="240.80" y="298.52" fill="#88c0d0">▮</text>
+<text x="249.20" y="298.52" fill="#a3be8c">▮</text>
+<text x="257.60" y="298.52" fill="#ebcb8b">▮</text>
+<text x="266.00" y="298.52" fill="#d08770">▮</text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00 988.40" y="298.52" fill="#6272a4">Everything on one short line; no blank line between prompts · plain text · nerd font</text>
+<text x="1055.60" y="298.52" fill="#bd93f9">│</text>
+<text x="1080.80" y="298.52" fill="#bd93f9">│</text>
+<text x="14.00" y="317.00" fill="#44475a">│</text>
+<text x="30.80" y="317.00" fill="#343746">0</text>
+<text x="39.20" y="317.00" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="317.00" fill="#f8f8f2">full-stack        </text>
+<text x="224.00" y="317.00" fill="#d65d0e">▮</text>
+<text x="232.40" y="317.00" fill="#d79921">▮</text>
+<text x="240.80" y="317.00" fill="#689d6a">▮</text>
+<text x="249.20" y="317.00" fill="#458588">▮</text>
+<text x="257.60" y="317.00" fill="#b16286">▮</text>
+<text x="266.00" y="317.00" fill="#98971a">▮</text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00 988.40 996.80" y="317.00" fill="#6272a4">Every dev module: languages, docker, cloud, k8s, jobs, status · powerline · nerd font</text>
+<text x="1055.60" y="317.00" fill="#bd93f9">│</text>
+<text x="1080.80" y="317.00" fill="#bd93f9">│</text>
+<text x="14.00" y="335.48" fill="#44475a">│</text>
+<text x="30.80" y="335.48" fill="#343746">0</text>
+<text x="39.20" y="335.48" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="335.48" fill="#f8f8f2">hacker-terminal   </text>
+<text x="224.00" y="335.48" fill="#33ff66">▮</text>
+<text x="232.40" y="335.48" fill="#1fcc4d">▮</text>
+<text x="240.80" y="335.48" fill="#15993a">▮</text>
+<text x="249.20" y="335.48" fill="#0e6b29">▮</text>
+<text x="257.60" y="335.48" fill="#0a4d1d">▮</text>
+<text x="282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80" y="335.48" fill="#6272a4">Phosphor-green flat blocks, like a 1983 mainframe · flat · unicode</text>
+<text x="1055.60" y="335.48" fill="#bd93f9">│</text>
+<text x="1080.80" y="335.48" fill="#bd93f9">│</text>
+<text x="14.00" y="353.96" fill="#44475a">│</text>
+<text x="30.80" y="353.96" fill="#343746">0</text>
+<text x="39.20" y="353.96" fill="#bd93f9">│</text>
+<text x="47.60 56.00 64.40" y="353.96" fill="#ff79c6"> ❯ </text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="353.96" fill="#f8f8f2" font-weight="700">synthwave-sunset  </text>
+<text x="224.00" y="353.96" fill="#ff2a6d">▮</text>
+<text x="232.40" y="353.96" fill="#d300c5">▮</text>
+<text x="240.80" y="353.96" fill="#7700ff">▮</text>
+<text x="249.20" y="353.96" fill="#05d9e8">▮</text>
+<text x="257.60" y="353.96" fill="#fee440">▮</text>
+<text x="266.00" y="353.96" fill="#1a1a40">▮</text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00" y="353.96" fill="#6272a4">Neon synthwave pills with battery and clock on the right · rounded · nerd font</text>
+<text x="1055.60" y="353.96" fill="#bd93f9">│</text>
+<text x="1080.80" y="353.96" fill="#bd93f9">│</text>
+<text x="14.00" y="372.44" fill="#44475a">│</text>
+<text x="30.80" y="372.44" fill="#343746">1</text>
+<text x="39.20" y="372.44" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="372.44" fill="#f8f8f2">cyber-slant       </text>
+<text x="224.00" y="372.44" fill="#fcee0a">▮</text>
+<text x="232.40" y="372.44" fill="#00f0ff">▮</text>
+<text x="240.80" y="372.44" fill="#ff003c">▮</text>
+<text x="249.20" y="372.44" fill="#711c91">▮</text>
+<text x="257.60" y="372.44" fill="#0abdc6">▮</text>
+<text x="266.00" y="372.44" fill="#ea00d9">▮</text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80" y="372.44" fill="#6272a4">Cyberpunk yellow-and-cyan slants, two lines · slanted · nerd font</text>
+<text x="1055.60" y="372.44" fill="#bd93f9">│</text>
+<text x="1080.80" y="372.44" fill="#bd93f9">│</text>
+<text x="14.00" y="390.92" fill="#44475a">│</text>
+<text x="30.80" y="390.92" fill="#343746">1</text>
+<text x="39.20" y="390.92" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="390.92" fill="#f8f8f2">plain-ascii       </text>
+<text x="224.00" y="390.92" fill="#e0e0e0">▮</text>
+<text x="232.40" y="390.92" fill="#b0b0b0">▮</text>
+<text x="240.80" y="390.92" fill="#8a8a8a">▮</text>
+<text x="249.20" y="390.92" fill="#6a6a6a">▮</text>
+<text x="257.60" y="390.92" fill="#4a4a4a">▮</text>
+<text x="266.00" y="390.92" fill="#333333">▮</text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00" y="390.92" fill="#6272a4">No special fonts at all: plain ASCII words, safe anywhere · plain text · ascii</text>
+<text x="1055.60" y="390.92" fill="#bd93f9">│</text>
+<text x="1080.80" y="390.92" fill="#bd93f9">│</text>
+<text x="14.00" y="409.40" fill="#44475a">│</text>
+<text x="30.80" y="409.40" fill="#343746">1</text>
+<text x="39.20" y="409.40" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="409.40" fill="#f8f8f2">amber-crt         </text>
+<text x="224.00" y="409.40" fill="#ffb000">▮</text>
+<text x="232.40" y="409.40" fill="#e69c00">▮</text>
+<text x="240.80" y="409.40" fill="#b37700">▮</text>
+<text x="249.20" y="409.40" fill="#805500">▮</text>
+<text x="257.60" y="409.40" fill="#523600">▮</text>
+<text x="282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60" y="409.40" fill="#6272a4">Amber monochrome flat blocks with the time up front · flat · unicode</text>
+<text x="1055.60" y="409.40" fill="#bd93f9">│</text>
+<text x="1080.80" y="409.40" fill="#bd93f9">│</text>
+<text x="14.00" y="427.88" fill="#44475a">│</text>
+<text x="30.80" y="427.88" fill="#343746">1</text>
+<text x="39.20" y="427.88" fill="#bd93f9">│</text>
+<text x="72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60" y="427.88" fill="#f8f8f2">kanagawa-wave     </text>
+<text x="224.00" y="427.88" fill="#7e9cd8">▮</text>
+<text x="232.40" y="427.88" fill="#957fb8">▮</text>
+<text x="240.80" y="427.88" fill="#7aa89f">▮</text>
+<text x="249.20" y="427.88" fill="#98bb6c">▮</text>
+<text x="257.60" y="427.88" fill="#e6c384">▮</text>
+<text x="266.00" y="427.88" fill="#ffa066">▮</text>
+<text x="291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00" y="427.88" fill="#6272a4">Kanagawa powerline with language versions on the right · powerline · nerd font</text>
+<text x="1055.60" y="427.88" fill="#bd93f9">│</text>
+<text x="1080.80" y="427.88" fill="#bd93f9">│</text>
+<text x="14.00" y="446.36" fill="#44475a">│</text>
+<text x="30.80" y="446.36" fill="#343746">1</text>
+<text x="39.20" y="446.36" fill="#bd93f9">│</text>
+<text x="1055.60" y="446.36" fill="#bd93f9">│</text>
+<text x="1080.80" y="446.36" fill="#bd93f9">│</text>
+<text x="14.00" y="464.84" fill="#44475a">│</text>
+<text x="30.80" y="464.84" fill="#343746">1</text>
+<text x="39.20" y="464.84" fill="#bd93f9">│</text>
+<text x="1055.60" y="464.84" fill="#bd93f9">│</text>
+<text x="1080.80" y="464.84" fill="#bd93f9">│</text>
+<text x="14.00" y="483.32" fill="#44475a">│</text>
+<text x="39.20" y="483.32" fill="#bd93f9">│</text>
+<text x="47.60 56.00" y="483.32" fill="#8be9fd"> ▍</text>
+<text x="64.40 72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40" y="483.32" fill="#8be9fd" font-weight="700">PREVIEW · synthwave-sunset</text>
+<text x="1055.60" y="483.32" fill="#bd93f9">│</text>
+<text x="1080.80" y="483.32" fill="#bd93f9">│</text>
+<text x="14.00" y="501.80" fill="#44475a">│</text>
+<text x="39.20" y="501.80" fill="#bd93f9">│</text>
+<text x="47.60 56.00 64.40 72.80 81.20 89.60 98.00" y="501.80" fill="#50fa7b" font-weight="700"> ✔ $?=0</text>
+<text x="140.00" y="501.80" fill="#ff2a6d"></text>
+<text x="148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40" y="501.80" fill="#f5f5ff" font-weight="700"> neon-city </text>
+<text x="240.80" y="501.80" fill="#ff2a6d"></text>
+<text x="257.60" y="501.80" fill="#d300c5"></text>
+<text x="266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80" y="501.80" fill="#f5f5ff">  feature/neon-dreams </text>
+<text x="459.20" y="501.80" fill="#d300c5"></text>
+<text x="476.00" y="501.80" fill="#7700ff"></text>
+<text x="484.40 492.80 501.20 509.60 518.00" y="501.80" fill="#f5f5ff"> !+? </text>
+<text x="526.40" y="501.80" fill="#7700ff"></text>
+<text x="543.20" y="501.80" fill="#05d9e8"></text>
+<text x="551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00" y="501.80" fill="#0d0221">  v26.10.0 </text>
+<text x="652.40" y="501.80" fill="#05d9e8"></text>
+<text x="669.20" y="501.80" fill="#fee440"></text>
+<text x="677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40" y="501.80" fill="#0d0221">  v3.15.1 (neon-venv) </text>
+<text x="870.80" y="501.80" fill="#fee440"></text>
+<text x="896.00" y="501.80" fill="#05d9e8" font-weight="700">❯</text>
+<text x="938.00" y="501.80" fill="#343746">·</text>
+<text x="971.60" y="501.80" fill="#343746">·</text>
+<text x="1005.20" y="501.80" fill="#343746">·</text>
+<text x="1038.80" y="501.80" fill="#343746">·</text>
+<text x="1055.60" y="501.80" fill="#bd93f9">│</text>
+<text x="1080.80" y="501.80" fill="#bd93f9">│</text>
+<text x="14.00" y="520.28" fill="#44475a">│</text>
+<text x="39.20" y="520.28" fill="#bd93f9">│</text>
+<text x="47.60 56.00 64.40 72.80 81.20 89.60 98.00" y="520.28" fill="#ff5555" font-weight="700"> ✘ $?=1</text>
+<text x="140.00" y="520.28" fill="#ff2a6d"></text>
+<text x="148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40" y="520.28" fill="#f5f5ff" font-weight="700"> neon-city </text>
+<text x="240.80" y="520.28" fill="#ff2a6d"></text>
+<text x="257.60" y="520.28" fill="#d300c5"></text>
+<text x="266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80" y="520.28" fill="#f5f5ff">  feature/neon-dreams </text>
+<text x="459.20" y="520.28" fill="#d300c5"></text>
+<text x="476.00" y="520.28" fill="#7700ff"></text>
+<text x="484.40 492.80 501.20 509.60 518.00" y="520.28" fill="#f5f5ff"> !+? </text>
+<text x="526.40" y="520.28" fill="#7700ff"></text>
+<text x="543.20" y="520.28" fill="#05d9e8"></text>
+<text x="551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00" y="520.28" fill="#0d0221">  v26.10.0 </text>
+<text x="652.40" y="520.28" fill="#05d9e8"></text>
+<text x="669.20" y="520.28" fill="#fee440"></text>
+<text x="677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40" y="520.28" fill="#0d0221">  v3.15.1 (neon-venv) </text>
+<text x="870.80" y="520.28" fill="#fee440"></text>
+<text x="896.00" y="520.28" fill="#ff2a6d" font-weight="700">❯</text>
+<text x="938.00" y="520.28" fill="#343746">·</text>
+<text x="971.60" y="520.28" fill="#343746">·</text>
+<text x="1005.20" y="520.28" fill="#343746">·</text>
+<text x="1038.80" y="520.28" fill="#343746">·</text>
+<text x="1055.60" y="520.28" fill="#bd93f9">│</text>
+<text x="1080.80" y="520.28" fill="#bd93f9">│</text>
+<text x="14.00" y="538.76" fill="#44475a">│</text>
+<text x="39.20" y="538.76" fill="#bd93f9">│</text>
+<text x="1055.60" y="538.76" fill="#bd93f9">│</text>
+<text x="1080.80" y="538.76" fill="#bd93f9">│</text>
+<text x="14.00 22.40 30.80" y="557.24" fill="#44475a">╰──</text>
+<text x="39.20" y="557.24" fill="#bd93f9">│</text>
+<text x="56.00" y="557.24" fill="#ff79c6" font-weight="700">⏎</text>
+<text x="64.40 72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00" y="557.24" fill="#6272a4"> apply (u undoes)   </text>
+<text x="232.40 240.80 249.20" y="557.24" fill="#ff79c6" font-weight="700">j/k</text>
+<text x="257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20" y="557.24" fill="#6272a4"> browse   </text>
+<text x="341.60 350.00 358.40" y="557.24" fill="#ff79c6" font-weight="700">esc</text>
+<text x="366.80 375.20 383.60 392.00 400.40 408.80" y="557.24" fill="#6272a4"> close</text>
+<text x="1055.60" y="557.24" fill="#bd93f9">│</text>
+<text x="1072.40 1080.80" y="557.24" fill="#bd93f9">─╯</text>
+<text x="14.00 22.40" y="575.72" fill="#44475a">╭┤</text>
+<text x="39.20 47.60 56.00 64.40 72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60" y="575.72" fill="#bd93f9">╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</text>
+<text x="1072.40 1080.80" y="575.72" fill="#44475a">─╮</text>
+<text x="14.00" y="594.20" fill="#44475a">│</text>
+<text x="22.40 30.80 39.20" y="594.20" fill="#343746"> 17</text>
+<text x="1080.80" y="594.20" fill="#44475a">│</text>
+<text x="14.00" y="612.68" fill="#44475a">│</text>
+<text x="22.40 30.80 39.20 47.60 56.00 64.40 72.80 81.20 89.60 98.00" y="612.68" fill="#343746"> 17:25:02 </text>
+<text x="106.40 114.80 123.20 131.60 140.00 148.40 156.80" y="612.68" fill="#6272a4">[  sys]</text>
+<text x="165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40" y="612.68" fill="#f8f8f2"> config: ~/.config/custtymize/prompt.toml                                                                    </text>
+<text x="1080.80" y="612.68" fill="#44475a">│</text>
+<text x="14.00" y="631.16" fill="#44475a">│</text>
+<text x="22.40 30.80 39.20 47.60 56.00 64.40 72.80 81.20 89.60 98.00" y="631.16" fill="#343746"> 17:25:02 </text>
+<text x="106.40 114.80 123.20 131.60 140.00 148.40 156.80" y="631.16" fill="#6272a4">[  sys]</text>
+<text x="165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40" y="631.16" fill="#f8f8f2"> press ? for help, : for commands                                                                            </text>
+<text x="1080.80" y="631.16" fill="#44475a">│</text>
+<text x="14.00" y="649.64" fill="#44475a">│</text>
+<text x="22.40 30.80 39.20 47.60 56.00 64.40 72.80 81.20 89.60 98.00" y="649.64" fill="#343746"> 17:25:07 </text>
+<text x="106.40 114.80 123.20 131.60 140.00 148.40 156.80" y="649.64" fill="#ff79c6">[write]</text>
+<text x="165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60 938.00 946.40 954.80 963.20 971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40" y="649.64" fill="#f8f8f2"> directory.style = &quot;bold fg:#282a36 bg:#bd93f9&quot;                                                              </text>
+<text x="1080.80" y="649.64" fill="#44475a">│</text>
+<text x="14.00" y="668.12" fill="#44475a">│</text>
+<text x="1080.80" y="668.12" fill="#44475a">│</text>
+<text x="14.00" y="686.60" fill="#44475a">│</text>
+<text x="1080.80" y="686.60" fill="#44475a">│</text>
+<text x="14.00" y="705.08" fill="#44475a">│</text>
+<text x="1080.80" y="705.08" fill="#44475a">│</text>
+<text x="14.00 22.40 30.80 39.20 47.60 56.00 64.40 72.80 81.20 89.60 98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20 383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40 492.80 501.20 509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80 837.20 845.60 854.00 862.40 870.80 879.20 887.60 896.00 904.40 912.80 921.20 929.60" y="723.56" fill="#44475a">╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────</text>
+<text x="938.00 946.40 954.80 963.20 971.60 980.00 988.40 996.80 1005.20 1013.60 1022.00 1030.40 1038.80 1047.20 1055.60 1064.00 1072.40" y="723.56" fill="#343746"> undo 1 · redo 0 </text>
+<text x="1080.80" y="723.56" fill="#44475a">╯</text>
+<text x="14.00 22.40 30.80 39.20 47.60 56.00 64.40 72.80 81.20" y="742.04" fill="#1b1c25" font-weight="700"> PRESETS </text>
+<text x="89.60" y="742.04" fill="#8be9fd"></text>
+<text x="98.00 106.40 114.80 123.20 131.60 140.00 148.40 156.80 165.20 173.60 182.00 190.40 198.80 207.20 215.60 224.00 232.40 240.80 249.20 257.60 266.00 274.40 282.80 291.20 299.60 308.00 316.40 324.80 333.20 341.60 350.00 358.40 366.80 375.20" y="742.04" fill="#f8f8f2"> ~/.config/custtymize/prompt.toml </text>
+<text x="383.60 392.00 400.40 408.80 417.20 425.60 434.00 442.40 450.80 459.20 467.60 476.00 484.40" y="742.04" fill="#ffb86c"> [+] UNSAVED </text>
+<text x="492.80 501.20" y="742.04" fill="#343746">│ </text>
+<text x="509.60 518.00 526.40 534.80 543.20 551.60 560.00 568.40 576.80 585.20 593.60 602.00 610.40 618.80 627.20 635.60 644.00 652.40 660.80 669.20 677.60 686.00 694.40 702.80 711.20 719.60 728.00 736.40 744.80 753.20 761.60 770.00 778.40 786.80 795.20 803.60 812.00 820.40 828.80" y="742.04" fill="#6272a4">dracula · powerline · right prompt · ne</text>
+<text x="837.20 845.60 854.00 862.40" y="742.04" fill="#ff79c6"> j/k</text>
+<text x="870.80 879.20 887.60 896.00 904.40 912.80 921.20" y="742.04" fill="#6272a4"> browse</text>
+<text x="929.60 938.00" y="742.04" fill="#ff79c6"> ⏎</text>
+<text x="946.40 954.80 963.20 971.60 980.00 988.40" y="742.04" fill="#6272a4"> apply</text>
+<text x="996.80 1005.20 1013.60 1022.00" y="742.04" fill="#ff79c6"> esc</text>
+<text x="1030.40 1038.80 1047.20 1055.60 1064.00 1072.40" y="742.04" fill="#6272a4"> close</text>
+</svg>

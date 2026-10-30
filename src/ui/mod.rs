@@ -42,7 +42,8 @@ pub fn draw(f: &mut Frame, app: &mut App) {
 fn draw_main(f: &mut Frame, area: Rect, app: &mut App, t: &Theme) {
     let preview_h = preview::height(app);
     let log_h = if area.height > 34 { 9 } else { 6 };
-    let [header, prev, main, logs, status] = Layout::vertical([
+    let [header, menu, prev, main, logs, status] = Layout::vertical([
+        Constraint::Length(1),
         Constraint::Length(1),
         Constraint::Length(preview_h),
         Constraint::Min(8),
@@ -54,6 +55,7 @@ fn draw_main(f: &mut Frame, area: Rect, app: &mut App, t: &Theme) {
     let [list, insp] = Layout::horizontal([Constraint::Length(list_w), Constraint::Min(20)]).areas(main);
 
     draw_header(f, header, app, t);
+    draw_menu(f, menu, app, t);
     preview::draw(f, prev, app, t);
     modules::draw(f, list, app, t);
     inspector::draw(f, insp, app, t);
@@ -87,6 +89,43 @@ fn draw_header(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
     ]);
     f.render_widget(Paragraph::new(left), area);
     f.render_widget(Paragraph::new(right).alignment(ratatui::layout::Alignment::Right), area);
+}
+
+/// The main actions with their keys and current values, always visible. Values are
+/// dropped from the right when the terminal is too narrow for them.
+fn draw_menu(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
+    let g = &app.model.globals;
+    let items: [(&str, &str, String); 9] = [
+        ("P", "preset", String::new()),
+        ("T", "theme", g.palette.to_string()),
+        ("F", "glyphs", g.glyphs.label().to_string()),
+        ("S", "shape", g.shape.label().to_string()),
+        ("L", "layout", String::new()),
+        ("g", "more", String::new()),
+        ("O", "saved", String::new()),
+        ("B", "backups", String::new()),
+        ("^S", "save", String::new()),
+    ];
+    let build = |values: usize| -> Line<'static> {
+        let mut spans = vec![Span::raw(" ")];
+        let mut shown = 0;
+        for (i, (k, label, value)) in items.iter().enumerate() {
+            if i == 6 {
+                spans.push(Span::styled(" │ ", t.faint()));
+            } else if i > 0 {
+                spans.push(Span::raw(" "));
+            }
+            spans.push(Span::styled(format!(" {k} "), Style::new().fg(t.bg).bg(t.accent2).add_modifier(Modifier::BOLD)));
+            spans.push(Span::styled(format!(" {label}"), t.text()));
+            if !value.is_empty() && shown < values {
+                spans.push(Span::styled(format!(" {value}"), Style::new().fg(t.info)));
+                shown += 1;
+            }
+        }
+        Line::from(spans)
+    };
+    let line = (0..=3).rev().map(build).find(|l| l.width() as u16 <= area.width).unwrap_or_else(|| build(0));
+    f.render_widget(Paragraph::new(line).style(Style::new().bg(t.scan)), area);
 }
 
 /// Standard pane chrome: rounded border, `┤ 01 TITLE ├` tab, focus colour.

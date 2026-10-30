@@ -177,6 +177,33 @@ impl ModuleDef {
     }
 }
 
+/// Symbols for terminals without a Nerd Font: `(unicode, ascii)`. Spacing matches the
+/// Nerd Font defaults above (`git_branch` has none; its body adds the space).
+pub fn plain_symbols(name: &str) -> (&'static str, &'static str) {
+    match name {
+        "git_branch" => ("⎇", "git"),
+        "nodejs" => ("⬢ ", "node "),
+        "rust" => ("🦀 ", "rs "),
+        "python" => ("🐍 ", "py "),
+        "golang" => ("🐹 ", "go "),
+        "docker_context" => ("🐳 ", "docker "),
+        "cmd_duration" => ("⏱ ", "took "),
+        "time" => ("◷ ", ""),
+        "package" => ("📦 ", "pkg "),
+        "java" => ("☕ ", "java "),
+        "ruby" => ("💎 ", "rb "),
+        "lua" => ("🌙 ", "lua "),
+        "zig" => ("↯ ", "zig "),
+        "kubernetes" => ("☸ ", "k8s "),
+        "aws" => ("☁ ", "aws "),
+        "memory_usage" => ("▤ ", "mem "),
+        "jobs" => ("✦", "*"),
+        "status" => ("✘ ", "x "),
+        "sudo" => ("⚡ ", "sudo "),
+        _ => ("", ""),
+    }
+}
+
 pub fn lookup(name: &str) -> Option<&'static ModuleDef> {
     CATALOG.iter().find(|m| m.name == name)
 }

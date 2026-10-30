@@ -10,11 +10,12 @@ use ratatui::style::Color;
 use ratatui::text::Text;
 use toml_edit::DocumentMut;
 
-use crate::config::{diff, generate, load, save};
+use crate::config::{diff, generate, library, load, save};
 use crate::model::catalog::{self, OptDef, OptKind};
 use crate::model::color::{Rgb, dracula};
 use crate::model::palette::{self, PALETTES};
-use crate::model::{Cap, Layout, Model, OptValue, Segment, Shape, Side, quote};
+use crate::model::presets::{self, PRESETS};
+use crate::model::{Cap, Glyphs, Layout, Model, OptValue, Segment, Shape, Side, quote};
 use crate::preview::{self, Outcome, PromptOutput, Runner};
 use crate::sandbox::Scenario;
 
@@ -74,13 +75,15 @@ pub enum GlobalRow {
     Success,
     Error,
     Palette,
+    Glyphs,
     AddNewline,
 }
 
 impl GlobalRow {
-    pub const ALL: [GlobalRow; 8] = [
+    pub const ALL: [GlobalRow; 9] = [
         GlobalRow::Layout,
         GlobalRow::Shape,
+        GlobalRow::Glyphs,
         GlobalRow::Cap,
         GlobalRow::PromptChar,
         GlobalRow::Success,
@@ -96,7 +99,8 @@ impl GlobalRow {
             GlobalRow::PromptChar => "prompt char",
             GlobalRow::Success => "success colour",
             GlobalRow::Error => "error colour",
-            GlobalRow::Palette => "palette preset",
+            GlobalRow::Palette => "colour theme",
+            GlobalRow::Glyphs => "glyphs (font)",
             GlobalRow::AddNewline => "blank line before",
         }
     }
@@ -253,6 +257,45 @@ pub struct BackupBrowser {
     pub preview_error: Option<String>,
 }
 
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+pub enum GalleryKind {
+    Presets,
+    Themes,
+    Saved,
+}
+
+impl GalleryKind {
+    pub fn title(&self) -> &'static str {
+        match self {
+            GalleryKind::Presets => "presets // complete prompt designs",
+            GalleryKind::Themes => "themes // colour palettes",
+            GalleryKind::Saved => "saved configs",
+        }
+    }
+}
+
+#[derive(Clone, Debug)]
+pub struct GalleryItem {
+    pub name: String,
+    pub blurb: String,
+    pub swatches: Vec<Rgb>,
+    pub path: Option<PathBuf>,
+}
+
+/// A list of things to apply (presets, themes, saved configs) with a live preview of the
+/// highlighted one rendered against the current design.
+#[derive(Clone, Debug)]
+pub struct Gallery {
+    pub kind: GalleryKind,
+    pub items: Vec<GalleryItem>,
+    pub idx: usize,
+    pub preview: Option<(RenderedPrompt, RenderedPrompt)>,
+    pub preview_for: Option<usize>,
+    pub error: Option<String>,
+    /// `d` was pressed once on this saved config; a second `d` deletes it.
+    pub confirm_delete: bool,
+}
+
 #[derive(Clone, Debug)]
 pub enum Mode {
     Boot,
@@ -268,6 +311,8 @@ pub enum Mode {
     ConfirmQuit,
     Review(Box<InstallReview>),
     Backups(BackupBrowser),
+    Gallery(Box<Gallery>),
+    Welcome,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
@@ -361,6 +406,8 @@ pub struct App {
     pub scenario: Scenario,
     pub engine_version: String,
     imported: Option<String>,
+    /// Show the welcome screen once the boot sequence ends.
+    welcome_pending: bool,
 
     pub truecolor: bool,
     pub flash: Option<(String, Instant)>,
@@ -372,6 +419,8 @@ pub struct AppInit {
     pub env: Option<preview::Env>,
     /// Text of a starship config being imported (not yet saved to `config_path`).
     pub imported: Option<String>,
+    /// No custtymize config yet: greet the user with the three steps.
+    pub first_run: bool,
     pub sandbox_error: Option<String>,
     pub truecolor: bool,
     pub skip_boot: bool,
@@ -386,7 +435,7 @@ fn home_relative(p: &Path) -> String {
 
 impl App {
     pub fn new(init: AppInit) -> App {
-        let AppInit { config_path, loaded, env, imported, sandbox_error, truecolor, skip_boot } = init;
+        let AppInit { config_path, loaded, env, imported, first_run, sandbox_error, truecolor, skip_boot } = init;
         let disk_text = std::fs::read_to_string(&config_path).ok();
         let runner = env.clone().map(Runner::spawn);
 
@@ -421,7 +470,11 @@ impl App {
             config_path,
             undo: Vec::new(),
             redo: Vec::new(),
-            mode: if skip_boot { Mode::Normal } else { Mode::Boot },
+            mode: match (skip_boot, first_run) {
+                (false, _) => Mode::Boot,
+                (true, true) => Mode::Welcome,
+                (true, false) => Mode::Normal,
+            },
             focus: Focus::Modules,
             sel: 0,
             field: 0,
@@ -442,6 +495,7 @@ impl App {
             scenario: Scenario::DirtyRepo,
             engine_version: env!("CARGO_PKG_VERSION").to_string(),
             imported,
+            welcome_pending: first_run && !skip_boot,
             truecolor,
             flash: None,
         };
@@ -465,6 +519,10 @@ impl App {
         while self.log.len() > LOG_LIMIT {
             self.log.pop_front();
         }
+    }
+
+    pub fn imported_from_starship(&self) -> bool {
+        self.imported.is_some()
     }
 
     pub fn dirty(&self) -> bool {
@@ -590,6 +648,10 @@ impl App {
         if matches!(self.mode, Mode::Boot) && self.started.elapsed() > BOOT_DURATION + Duration::from_millis(350) {
             self.mode = Mode::Normal;
         }
+        if self.welcome_pending && matches!(self.mode, Mode::Normal) {
+            self.welcome_pending = false;
+            self.mode = Mode::Welcome;
+        }
         if let Mode::Matrix(m) = &mut self.mode {
             for d in &mut m.drops {
                 d.0 += d.1;
@@ -668,6 +730,14 @@ impl App {
             }
             Mode::Review(r) => self.key_review(*r, k),
             Mode::Backups(b) => self.key_backups(b, k),
+            Mode::Gallery(g) => self.key_gallery(*g, k),
+            Mode::Welcome => match k.code {
+                KeyCode::Char('P') => {
+                    self.open_gallery(GalleryKind::Presets);
+                    std::mem::replace(&mut self.mode, Mode::Normal)
+                }
+                _ => Mode::Normal,
+            },
             Mode::ConfirmQuit => match k.code {
                 KeyCode::Char('y') | KeyCode::Char('Y') => {
                     self.quit = true;
@@ -712,10 +782,15 @@ impl App {
             KeyCode::Char('t') => self.mode = Mode::TomlView(0),
             KeyCode::Char('y') => self.yank(),
             KeyCode::Char('s') => self.cycle_scenario(),
-            KeyCode::Char('S') => self.set_shape(self.model.globals.shape.cycle(1)),
+            KeyCode::Char('S') => self.cycle_shape(1),
             KeyCode::Char('L') => self.set_layout(self.model.globals.layout.cycle(1)),
             KeyCode::Char('C') => self.set_cap(self.model.globals.cap.cycle(1)),
-            KeyCode::Char('P') => self.cycle_palette(1),
+            KeyCode::Char('P') => self.open_gallery(GalleryKind::Presets),
+            KeyCode::Char('T') => self.open_gallery(GalleryKind::Themes),
+            KeyCode::Char('O') => self.open_gallery(GalleryKind::Saved),
+            KeyCode::Char('F') => self.set_glyphs(self.model.globals.glyphs.cycle(1)),
+            KeyCode::Char(']') => self.cycle_palette(1),
+            KeyCode::Char('[') => self.cycle_palette(-1),
             KeyCode::Char('M') => self.start_matrix(),
             KeyCode::Char('B') => self.open_backups(),
             KeyCode::Char('a') => {
@@ -1072,9 +1147,10 @@ impl App {
         self.mode = Mode::Globals(row);
         match r {
             GlobalRow::Layout => self.set_layout(self.model.globals.layout.cycle(step)),
-            GlobalRow::Shape => self.set_shape(self.model.globals.shape.cycle(step)),
+            GlobalRow::Shape => self.cycle_shape(step),
             GlobalRow::Cap => self.set_cap(self.model.globals.cap.cycle(step)),
             GlobalRow::Palette => self.cycle_palette(step),
+            GlobalRow::Glyphs => self.set_glyphs(self.model.globals.glyphs.cycle(step)),
             GlobalRow::AddNewline => {
                 let before = self.model.clone();
                 self.model.globals.add_newline = !self.model.globals.add_newline;
@@ -1290,7 +1366,22 @@ impl App {
         }
     }
 
+    /// Next shape the current glyph set can draw.
+    fn cycle_shape(&mut self, step: i32) {
+        let mut shape = self.model.globals.shape.cycle(step);
+        if self.model.globals.glyphs != Glyphs::Nerd {
+            while shape.needs_nerd_font() {
+                shape = shape.cycle(step);
+            }
+        }
+        self.set_shape(shape);
+    }
+
     fn set_shape(&mut self, shape: Shape) {
+        if shape.needs_nerd_font() && self.model.globals.glyphs != Glyphs::Nerd {
+            self.log(Tag::Err, format!("{} needs Nerd Font glyphs — press F to switch glyphs to nerd font", shape.label()));
+            return;
+        }
         let before = self.model.clone();
         let overrides = self.model.segments.iter().filter(|s| s.format_override.is_some()).count();
         self.model.set_shape(shape);
@@ -1300,6 +1391,17 @@ impl App {
         }
         let extra = if overrides > 0 { format!(" · regenerated {overrides} hand-written module formats") } else { String::new() };
         self.commit(before, Tag::Write, format!("shape = {}{extra}", shape.label()));
+    }
+
+    fn set_glyphs(&mut self, g: Glyphs) {
+        let before = self.model.clone();
+        self.model.set_glyphs(g);
+        let shape_note = if before.globals.shape != self.model.globals.shape {
+            format!(" · shape → {} (no Nerd Font shapes)", self.model.globals.shape.label())
+        } else {
+            String::new()
+        };
+        self.commit(before, Tag::Write, format!("glyphs = {}: {}{shape_note}", g.label(), g.blurb()));
     }
 
     fn set_layout(&mut self, layout: Layout) {
@@ -1327,14 +1429,169 @@ impl App {
             Some(i) => &PALETTES[(i as i32 + step).rem_euclid(PALETTES.len() as i32) as usize],
             None => &PALETTES[0],
         };
-        self.apply_preset(next);
+        self.apply_theme(next);
     }
 
-    fn apply_preset(&mut self, p: &'static palette::Palette) {
+    fn apply_theme(&mut self, p: &'static palette::Palette) {
         let before = self.model.clone();
         self.model.apply_palette(p);
-        let mono = if p.mono { " · UI re-skinned (monochrome)" } else { "" };
-        self.commit(before, Tag::Write, format!("preset {} applied to {} segments{mono}", p.name, self.model.styled().count()));
+        self.commit(before, Tag::Write, format!("theme {} applied to {} segments", p.name, self.model.styled().count()));
+    }
+
+    fn apply_design(&mut self, p: &'static presets::Preset) {
+        let before = self.model.clone();
+        self.model.apply_design(p);
+        self.sel = 0;
+        self.commit(before, Tag::Write, format!("preset {}: {}", p.name, p.blurb));
+    }
+
+    fn library_dir(&self) -> PathBuf {
+        library::dir(&self.config_path)
+    }
+
+    fn save_named(&mut self, name: &str, overwrite: bool) {
+        if name.is_empty() {
+            self.log(Tag::Err, "usage: :save <name>   (then O or :open to browse saved configs)".into());
+            return;
+        }
+        let toml = self.generated_toml();
+        if self.validated(&toml).is_none() {
+            return;
+        }
+        match library::save(&self.library_dir(), name, &toml, overwrite) {
+            Ok(p) => {
+                self.log(Tag::Ok, format!("saved as {} — O to browse saved configs", home_relative(&p)));
+                self.flash = Some(("SAVED".into(), Instant::now()));
+            }
+            Err(e) => self.log(Tag::Err, e),
+        }
+    }
+
+    pub fn open_gallery(&mut self, kind: GalleryKind) {
+        let items: Vec<GalleryItem> = match kind {
+            GalleryKind::Presets => PRESETS
+                .iter()
+                .map(|p| GalleryItem {
+                    name: p.name.into(),
+                    blurb: format!("{} · {} · {}", p.blurb, p.shape.label(), p.glyphs.label()),
+                    swatches: palette::find(p.palette).map(|pal| pal.accents.iter().take(6).copied().collect()).unwrap_or_default(),
+                    path: None,
+                })
+                .collect(),
+            GalleryKind::Themes => PALETTES
+                .iter()
+                .map(|p| GalleryItem {
+                    name: p.name.into(),
+                    blurb: String::new(),
+                    swatches: p.accents.to_vec(),
+                    path: None,
+                })
+                .collect(),
+            GalleryKind::Saved => library::list(&self.library_dir())
+                .into_iter()
+                .map(|e| GalleryItem { name: e.name, blurb: format!("saved {}", e.modified), swatches: vec![], path: Some(e.path) })
+                .collect(),
+        };
+        if items.is_empty() {
+            self.log(Tag::Warn, "no saved configs yet — :save <name> stores the current design".into());
+            return;
+        }
+        let idx = match kind {
+            GalleryKind::Themes => items.iter().position(|i| i.name == self.model.globals.palette).unwrap_or(0),
+            _ => 0,
+        };
+        let mut g = Gallery { kind, items, idx, preview: None, preview_for: None, error: None, confirm_delete: false };
+        self.render_gallery_preview(&mut g);
+        self.mode = Mode::Gallery(Box::new(g));
+    }
+
+    /// The design the highlighted gallery item would produce, as TOML.
+    fn gallery_candidate(&self, g: &Gallery) -> Result<String, String> {
+        let item = g.items.get(g.idx).ok_or("nothing selected")?;
+        let mut m = self.model.clone();
+        match g.kind {
+            GalleryKind::Presets => m.apply_design(presets::find(&item.name).ok_or("unknown preset")?),
+            GalleryKind::Themes => m.apply_palette(palette::find(&item.name).ok_or("unknown theme")?),
+            GalleryKind::Saved => {
+                let path = item.path.as_ref().ok_or("no file")?;
+                return std::fs::read_to_string(path).map_err(|e| e.to_string());
+            }
+        }
+        Ok(generate::render(&m, &self.base_doc, Some(&self.base_model)))
+    }
+
+    fn render_gallery_preview(&mut self, g: &mut Gallery) {
+        if g.preview_for == Some(g.idx) {
+            return;
+        }
+        g.preview_for = Some(g.idx);
+        g.preview = None;
+        g.error = None;
+        let Some(env) = self.env.clone() else { return };
+        match self.gallery_candidate(g) {
+            Ok(toml) => {
+                let o = preview::render_sync(&env, &toml, self.scenario, self.preview_width);
+                g.error = o.error.clone();
+                g.preview = Some((rendered(&o.success), rendered(&o.failure)));
+            }
+            Err(e) => g.error = Some(e),
+        }
+    }
+
+    fn key_gallery(&mut self, mut g: Gallery, k: KeyEvent) -> Mode {
+        let n = g.items.len();
+        let delete_armed = std::mem::take(&mut g.confirm_delete);
+        match k.code {
+            KeyCode::Char('j') | KeyCode::Down | KeyCode::Tab => g.idx = (g.idx + 1) % n.max(1),
+            KeyCode::Char('k') | KeyCode::Up | KeyCode::BackTab => g.idx = (g.idx + n.max(1) - 1) % n.max(1),
+            KeyCode::Home | KeyCode::Char('g') => g.idx = 0,
+            KeyCode::End | KeyCode::Char('G') => g.idx = n.saturating_sub(1),
+            KeyCode::Enter | KeyCode::Char(' ') => {
+                let Some(item) = g.items.get(g.idx).cloned() else { return Mode::Normal };
+                match g.kind {
+                    GalleryKind::Presets => {
+                        if let Some(p) = presets::find(&item.name) {
+                            self.apply_design(p);
+                        }
+                    }
+                    GalleryKind::Themes => {
+                        if let Some(p) = palette::find(&item.name) {
+                            self.apply_theme(p);
+                        }
+                    }
+                    GalleryKind::Saved => {
+                        let Some(path) = item.path else { return Mode::Normal };
+                        match load::load(&path) {
+                            Ok(l) => self.replace_model(l.model, &format!("opened saved config {} (ctrl-s to install it)", item.name)),
+                            Err(e) => self.log(Tag::Err, format!("can't open {}: {e}", item.name)),
+                        }
+                    }
+                }
+                return Mode::Normal;
+            }
+            KeyCode::Char('d') if g.kind == GalleryKind::Saved => {
+                if delete_armed {
+                    if let Some(path) = g.items.get(g.idx).and_then(|i| i.path.clone()) {
+                        match std::fs::remove_file(&path) {
+                            Ok(()) => self.log(Tag::Ok, format!("deleted saved config {}", home_relative(&path))),
+                            Err(e) => self.log(Tag::Err, format!("delete failed: {e}")),
+                        }
+                    }
+                    g.items.remove(g.idx);
+                    if g.items.is_empty() {
+                        return Mode::Normal;
+                    }
+                    g.idx = g.idx.min(g.items.len() - 1);
+                    g.preview_for = None;
+                } else {
+                    g.confirm_delete = true;
+                }
+            }
+            KeyCode::Esc | KeyCode::Char('q') => return Mode::Normal,
+            _ => {}
+        }
+        self.render_gallery_preview(&mut g);
+        Mode::Gallery(Box::new(g))
     }
 
     fn cycle_scenario(&mut self) {
@@ -1758,13 +2015,43 @@ impl App {
             "q!" | "quit!" => self.request_quit(true),
             "wq" | "x" => self.begin_install(false, true),
             "wq!" | "x!" => self.begin_install(true, true),
-            "preset" | "palette" => match palette::find(arg) {
-                Some(p) => self.apply_preset(p),
+            "preset" | "presets" => match presets::find(arg) {
+                _ if arg.is_empty() => self.open_gallery(GalleryKind::Presets),
+                Some(p) => self.apply_design(p),
                 None => self.log(
                     Tag::Err,
-                    format!("unknown preset {}; try: {}", quote(arg), PALETTES.iter().map(|p| p.name).collect::<Vec<_>>().join(", ")),
+                    format!("unknown preset {}; try: {}", quote(arg), PRESETS.iter().map(|p| p.name).collect::<Vec<_>>().join(", ")),
                 ),
             },
+            "theme" | "themes" | "palette" => match palette::find(arg) {
+                _ if arg.is_empty() => self.open_gallery(GalleryKind::Themes),
+                Some(p) => self.apply_theme(p),
+                None => self.log(
+                    Tag::Err,
+                    format!("unknown theme {}; try: {}", quote(arg), PALETTES.iter().map(|p| p.name).collect::<Vec<_>>().join(", ")),
+                ),
+            },
+            "glyphs" | "font" | "fonts" => match Glyphs::parse(arg) {
+                Some(g) => self.set_glyphs(g),
+                None if arg.is_empty() => self.set_glyphs(self.model.globals.glyphs.cycle(1)),
+                None => self.log(Tag::Err, "glyph sets: nerd unicode ascii".into()),
+            },
+            "save" => self.save_named(arg, false),
+            "save!" => self.save_named(arg, true),
+            "open" | "saved" | "load" => {
+                if arg.is_empty() {
+                    self.open_gallery(GalleryKind::Saved);
+                } else {
+                    let path = library::sanitize(arg).map(|n| self.library_dir().join(format!("{n}.toml")));
+                    match path.map(|p| (load::load(&p), p)) {
+                        Some((Ok(l), p)) if p.exists() => {
+                            self.replace_model(l.model, &format!("opened saved config {arg} (ctrl-s to install it)"))
+                        }
+                        _ => self.log(Tag::Err, format!("no saved config {} — O lists them", quote(arg))),
+                    }
+                }
+            }
+            "welcome" => self.mode = Mode::Welcome,
             "undo" | "u" => self.undo(),
             "redo" | "r" => self.redo(),
             "export" | "e" => {
@@ -1865,7 +2152,12 @@ pub const COMMANDS: &[(&str, &str)] = &[
     ("q!", "         quit without saving"),
     ("wq", "         save and quit"),
     ("x", "         save and quit"),
-    ("preset", "<name>   apply a palette preset"),
+    ("preset", "[name]   apply a complete design (no name: gallery)"),
+    ("theme", "[name]   apply a colour theme (no name: gallery)"),
+    ("glyphs", "<g>      nerd|unicode|ascii (what your font can draw)"),
+    ("save", "<name>   save the current design to your library"),
+    ("open", "[name]   open a saved design (no name: gallery)"),
+    ("welcome", "         show the getting-started screen"),
     ("undo", "         undo"),
     ("redo", "         redo"),
     ("export", "<path>   validate and write the TOML elsewhere"),
