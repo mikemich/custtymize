@@ -357,10 +357,14 @@ fn review(f: &mut Frame, area: Rect, app: &App, r: &InstallReview, t: &Theme) {
 }
 
 fn backups(f: &mut Frame, area: Rect, b: &BackupBrowser, t: &Theme) {
-    let outer = Rect::new(area.x + 2, area.y + 1, area.width.saturating_sub(4), area.height.saturating_sub(2));
+    // Below the list: heading, the prompt pair, a gap and the key line.
+    let below = b.preview.as_ref().map(pair_height).unwrap_or(1) + 3;
+    // Size to the content: list (up to 12 rows) plus a gap, what goes below it, and borders.
+    let want = b.entries.len().clamp(1, 12) as u16 + 1 + below + 2;
+    let h = want.min(area.height.saturating_sub(2));
+    let outer = Rect::new(area.x + 2, area.y + (area.height - h) / 2, area.width.saturating_sub(4), h);
     let inner = frame(f, outer, "B", &format!("backups // {} found", b.entries.len()), t);
-    let prev_h = b.preview.as_ref().map(pair_height).unwrap_or(2) + 3;
-    let list_h = inner.height.saturating_sub(prev_h + 2);
+    let list_h = inner.height.saturating_sub(below);
 
     let offset = b.idx.saturating_sub(list_h.saturating_sub(1) as usize);
     let rows: Vec<Line> = b

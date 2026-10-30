@@ -10,7 +10,7 @@ use crate::model::color::parse_style;
 use crate::model::palette;
 use crate::model::{Cap, Layout, Model, OptValue, Segment, Shape, Side};
 
-use super::generate::glyph;
+use super::generate::{self, glyph};
 
 pub struct Loaded {
     pub doc: DocumentMut,
@@ -181,6 +181,8 @@ pub fn model_from_doc(doc: &DocumentMut) -> (Model, Vec<String>) {
         let tok = match item {
             // Whitespace is re-created by the generator; anything else is kept verbatim.
             FmtItem::Text(t) if t.trim().is_empty() => continue,
+            // Separators and caps between modules are regenerated from the segment colours.
+            FmtItem::Text(t) if is_decoration(t) => continue,
             FmtItem::Text(t) => {
                 let mut s = Segment::literal(t);
                 s.side = side;
@@ -311,6 +313,14 @@ pub fn model_from_doc(doc: &DocumentMut) -> (Model, Vec<String>) {
     } else {
         Layout::OneLine
     };
+    // A module format identical to what the generator would write is not hand-written.
+    for seg in &mut segments {
+        if let Some(over) = seg.format_override.take()
+            && generate::module_format(seg, g.shape) != over
+        {
+            seg.format_override = Some(over);
+        }
+    }
     // Colours came from the file, not from one of our presets.
     g.palette = "custom";
     if let Some(b) = root.get("add_newline").and_then(Item::as_bool) {
@@ -329,6 +339,37 @@ pub fn model_from_doc(doc: &DocumentMut) -> (Model, Vec<String>) {
     }
     model.segments = segments;
     (model, notes)
+}
+
+/// True for text made only of styled separator/cap glyphs, e.g. `[\u{e0b0}](fg:#bd93f9 bg:#ff79c6)`.
+fn is_decoration(text: &str) -> bool {
+    const GLYPHS: [&str; 10] = [
+        glyph::ARROW_R,
+        glyph::THIN_R,
+        glyph::ARROW_L,
+        glyph::THIN_L,
+        glyph::ROUND_L,
+        glyph::ROUND_R,
+        glyph::SLANT_L,
+        glyph::SLANT_R,
+        glyph::GRADIENT_L,
+        glyph::GRADIENT_R,
+    ];
+    let mut rest = text.trim();
+    if rest.is_empty() {
+        return false;
+    }
+    while !rest.is_empty() {
+        let Some(inner) = rest.strip_prefix('[') else { return false };
+        let Some(close) = inner.find("](") else { return false };
+        if !GLYPHS.contains(&&inner[..close]) {
+            return false;
+        }
+        let after = &inner[close + 2..];
+        let Some(end) = after.find(')') else { return false };
+        rest = after[end + 1..].trim_start();
+    }
+    true
 }
 
 /// Splits `[❯](bold green)` into (`❯`, `bold green`).
@@ -423,6 +464,32 @@ disabled = true
         let (m, _) = model_from_doc(&doc);
         assert_eq!(generate::top_formats(&m).0, "$username[@](#727169)[mbp](#dcd7ba)[:](#727169)$directory$character");
         assert_eq!(m.globals.shape, Shape::Plain);
+    }
+
+    #[test]
+    fn generated_separators_are_not_literals() {
+        let doc: DocumentMut = USER_CONFIG.parse().expect("parse");
+        let (mut m, _) = model_from_doc(&doc);
+        m.set_shape(Shape::Powerline);
+        for s in &mut m.segments {
+            s.format_override = None;
+        }
+        let out = generate::render(&m, &doc, None);
+        let doc2: DocumentMut = out.parse().expect("reparse");
+        let (m2, _) = model_from_doc(&doc2);
+        assert!(m2.segments.iter().all(|s| s.literal.is_none()), "separators loaded as literals");
+        assert!(m2.segments.iter().all(|s| s.format_override.is_none()), "generated formats loaded as custom");
+        assert_eq!(m2.globals.shape, Shape::Powerline);
+        assert_eq!(generate::render(&m2, &doc2, Some(&m2)), out, "no-op must be byte-identical");
+        assert_eq!(generate::top_formats(&m2).0, generate::top_formats(&m).0);
+    }
+
+    #[test]
+    fn decoration_detection() {
+        assert!(is_decoration("[\u{e0b0}](fg:#bd93f9 bg:#ff79c6)"));
+        assert!(is_decoration("[\u{e0b0}](fg:#000) [░▒▓](fg:#fff)"));
+        assert!(!is_decoration("[@](#727169)"));
+        assert!(!is_decoration(""));
     }
 
     #[test]
