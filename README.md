@@ -1,26 +1,53 @@
-# custtymize
+<h1 align="center">▓▒░ custtymize ░▒▓</h1>
 
-A hacker-console TUI for designing your [Starship](https://starship.rs) prompt.
+<p align="center">
+  <b>Forge your <a href="https://starship.rs">Starship</a> prompt in a hacker console.</b><br>
+  Live preview rendered by real starship · colour picker · presets &amp; shapes · before/after review · one-key backups
+</p>
+
+<p align="center">
+  <a href="https://mikemich.github.io/custtymize/">Website</a> ·
+  <a href="#install">Install</a> ·
+  <a href="#keys">Keys</a> ·
+  <a href="#commands-">Commands</a>
+</p>
+
+<p align="center">
+  <img alt="Rust" src="https://img.shields.io/badge/rust-1.88%2B-ffb86c?style=flat-square&logo=rust&logoColor=white&labelColor=282a36">
+  <img alt="ratatui" src="https://img.shields.io/badge/built%20with-ratatui-bd93f9?style=flat-square&labelColor=282a36">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-50fa7b?style=flat-square&labelColor=282a36">
+</p>
+
+<p align="center">
+  <img src="docs/assets/main.svg" alt="custtymize: live prompt preview, module list, inspector and log" width="100%">
+</p>
+
 Pick modules, colours, shapes and presets, and watch the **real** `starship prompt`
-output update live, in both success and error states, before you write a byte to
-`~/.config/starship.toml`.
+output update live, in both success and error states. Nothing is written to
+`~/.config/starship.toml` until you have seen the before, the after and the diff.
 
-```
-▓▒░ CUSTTYMIZE ░▒▓  starship prompt forge // v0.1.0          starship 1.27.0 │ 24bit │ ● LINK │ 13:37:00
-╭┤ 00 LIVE PREVIEW ├─────────────────────────────────────────────────── dirty repo · 47ms s:scenario ╮
-│ ✔ $?=0    ░▒▓ …/neon-city   feature/neon-dreams  !+?   v3.15.1 (neon-venv)  ❯              │
-│┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄│
-│ ✘ $?=1    ░▒▓ …/neon-city   feature/neon-dreams  !+?   v3.15.1 (neon-venv)  ❯              │
-╰───────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭┤ 01 MODULES ├──────────────────╮╭┤ 02 INSPECTOR :: GIT_BRANCH ├─────────────────────────────────────╮
-│▌01 ■ directory          Aa     ││ ▸ Active git branch                                              │
-│ 02 ■ git_branch         Aa     ││ ❯ bg ················· ██ #ff79c6                                │
-│ …                              ││ …                                                                │
-```
+| | |
+| --- | --- |
+| <img src="docs/assets/picker.svg" alt="colour picker"> | <img src="docs/assets/review.svg" alt="install review with before/after and diff"> |
+| **Colour picker** with live preview | **Review before install**: before, after, diff |
+
+**Presets × shapes**, all rendered by starship:
+
+<img src="docs/assets/prompt-dracula.svg" alt="dracula powerline" height="34"><br>
+<img src="docs/assets/prompt-tokyo-night.svg" alt="tokyo-night rounded" height="34"><br>
+<img src="docs/assets/prompt-catppuccin-mocha.svg" alt="catppuccin-mocha slanted" height="34"><br>
+<img src="docs/assets/prompt-gruvbox.svg" alt="gruvbox powerline" height="34"><br>
+<img src="docs/assets/prompt-nord.svg" alt="nord rounded" height="34">
 
 ## Install
 
 Requires Rust (1.88+) and `starship` on your `PATH`.
+
+```bash
+cargo install --git https://github.com/mikemich/custtymize
+```
+
+or from a clone:
 
 ```bash
 cargo install --path .
@@ -208,3 +235,7 @@ preservation, stderr validation rules, backups and palettes.
   `COLORTERM`, so custtymize detects it from `TERM_PROGRAM_VERSION`. If the colours look
   wrong, start with `--ansi256` (or run `:colors 256`).
 * Press `M`.
+
+## License
+
+[MIT](LICENSE)

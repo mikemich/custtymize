@@ -2,6 +2,15 @@
 name = "custtymize"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.88"
+description = "A hacker-console TUI for designing your Starship prompt, with a live preview rendered by real starship"
+license = "MIT"
+repository = "https://github.com/mikemich/custtymize"
+homepage = "https://mikemich.github.io/custtymize/"
+readme = "README.md"
+keywords = ["starship", "prompt", "tui", "terminal", "ratatui"]
+categories = ["command-line-utilities"]
+exclude = ["docs/"]
 
 [dependencies]
 ansi-to-tui = "8"
