@@ -1,4 +1,4 @@
-//! Throwaway directories the preview runs `starship prompt` inside, so git, language
+//! Throwaway directories the preview renders the prompt inside, so git, language
 //! and path modules have something to show.
 
 use std::path::{Path, PathBuf};
@@ -83,7 +83,7 @@ fn git(dir: &Path, args: &[&str]) -> Result<()> {
     if out.status.success() {
         Ok(())
     } else {
-        Err(Error::Starship(format!("git {}: {}", args.join(" "), String::from_utf8_lossy(&out.stderr).trim())))
+        Err(Error::Msg(format!("git {}: {}", args.join(" "), String::from_utf8_lossy(&out.stderr).trim())))
     }
 }
 

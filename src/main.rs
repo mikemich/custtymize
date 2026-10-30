@@ -1,25 +1,29 @@
 mod app;
 mod config;
+mod engine;
 mod error;
 mod model;
 mod preview;
 mod sandbox;
 mod ui;
 
+use std::io::Write;
 use std::path::PathBuf;
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
-use clap::Parser;
+use clap::{Args, Parser, Subcommand};
 use crossterm::event::{self, Event, KeyEventKind};
 
 use app::{App, AppInit};
 use error::{Error, Result};
 
 #[derive(Parser, Debug)]
-#[command(name = "custtymize", version, about = "A hacker-console TUI for designing your Starship prompt")]
+#[command(name = "custtymize", version, about = "Design your shell prompt in a hacker-console TUI, then run it")]
 struct Cli {
-    /// Config to edit (default: $STARSHIP_CONFIG or ~/.config/starship.toml)
-    #[arg(short, long, value_name = "PATH")]
+    #[command(subcommand)]
+    cmd: Option<Cmd>,
+    /// Config to edit (default: $CUSTTYMIZE_CONFIG or ~/.config/custtymize/prompt.toml)
+    #[arg(short, long, value_name = "PATH", global = true)]
     config: Option<PathBuf>,
     /// Print the generated TOML to stdout instead of opening the UI
     #[arg(long)]
@@ -30,7 +34,7 @@ struct Cli {
     /// Apply a segment shape (powerline, rounded, slanted, flat, plain)
     #[arg(long, value_name = "SHAPE")]
     shape: Option<String>,
-    /// Render the prompt once with the generated config, print the ANSI and exit
+    /// Render the prompt once in the preview sandbox, print the ANSI and exit
     #[arg(long)]
     print_preview: bool,
     /// Skip the boot sequence
@@ -44,11 +48,57 @@ struct Cli {
     truecolor: bool,
 }
 
-fn default_config_path() -> Result<PathBuf> {
-    if let Some(p) = std::env::var_os("STARSHIP_CONFIG") {
-        return Ok(PathBuf::from(p));
+#[derive(Subcommand, Debug)]
+enum Cmd {
+    /// Print the prompt (called by the shell integration on every prompt)
+    Prompt(PromptArgs),
+    /// Print the shell integration script: eval "$(custtymize init zsh)"
+    Init {
+        /// zsh, bash or fish
+        shell: String,
+    },
+    /// Show how long each module takes in the current directory
+    Timings(PromptArgs),
+}
+
+/// Numbers arrive as strings so an empty value from the shell (`--cmd-duration=`)
+/// means "unknown" instead of a parse error that would blank the prompt.
+#[derive(Args, Debug, Default)]
+struct PromptArgs {
+    /// Print the right prompt instead of the left
+    #[arg(long)]
+    right: bool,
+    /// Print left, a 0x1e separator, then right (used by the zsh integration)
+    #[arg(long)]
+    both: bool,
+    #[arg(long, default_value = "")]
+    status: String,
+    #[arg(long, default_value = "")]
+    cmd_duration: String,
+    #[arg(long, default_value = "")]
+    jobs: String,
+    #[arg(long, default_value = "")]
+    terminal_width: String,
+    #[arg(long, default_value = "")]
+    keymap: String,
+    #[arg(long, default_value = "")]
+    shell: String,
+}
+
+/// The config to edit and, on first run, a starship config to start from.
+fn editor_paths() -> Result<(PathBuf, Option<PathBuf>)> {
+    if let Some(p) = std::env::var_os("CUSTTYMIZE_CONFIG") {
+        return Ok((PathBuf::from(p), None));
     }
-    Ok(dirs::home_dir().ok_or(Error::NoHome)?.join(".config").join("starship.toml"))
+    let own = engine::own_config_path().ok_or(Error::NoHome)?;
+    if own.exists() {
+        return Ok((own, None));
+    }
+    let starship = std::env::var_os("STARSHIP_CONFIG")
+        .map(PathBuf::from)
+        .or_else(|| dirs::home_dir().map(|h| h.join(".config/starship.toml")))
+        .filter(|p| p.exists());
+    Ok((own, starship))
 }
 
 /// COLORTERM is the reliable signal. Apple Terminal only sets TERM_PROGRAM, and gained
@@ -68,23 +118,127 @@ fn detect_truecolor() -> bool {
     }
 }
 
+fn prompt_context(args: &PromptArgs, doc: &toml_edit::DocumentMut) -> engine::Context {
+    let mut ctx = engine::Context::from_shell();
+    ctx.status = args.status.parse().unwrap_or(0);
+    ctx.duration_ms = args.cmd_duration.parse().ok();
+    ctx.jobs = args.jobs.parse().unwrap_or(0);
+    ctx.width = args.terminal_width.parse().unwrap_or(80);
+    ctx.keymap = args.keymap.clone();
+    ctx.timeout = engine::config_timeout(doc);
+    ctx
+}
+
+fn load_prompt_config(explicit: Option<PathBuf>) -> std::result::Result<toml_edit::DocumentMut, String> {
+    match explicit.or_else(engine::config_path) {
+        Some(p) => engine::load_doc(&p),
+        None => Ok(toml_edit::DocumentMut::new()),
+    }
+}
+
+/// Runs on every prompt, so it never fails: a broken config still gets a usable prompt
+/// and the reason goes to a log file instead of the terminal.
+fn prompt(args: PromptArgs, config: Option<PathBuf>) {
+    let shell = engine::Shell::parse(&args.shell).unwrap_or(engine::Shell::None);
+    let log = sandbox::cache_dir().ok().map(|d| d.join("prompt.log"));
+    let doc = match load_prompt_config(config) {
+        Ok(d) => d,
+        Err(e) => {
+            if let Some(l) = &log {
+                let _ = std::fs::write(l, format!("{e}\n"));
+            }
+            let fallback = "custtymize: config error (run `custtymize timings`) ❯ ";
+            print!("{fallback}");
+            return;
+        }
+    };
+    let ctx = prompt_context(&args, &doc);
+    let r = engine::render(&doc, &ctx, shell);
+    if let Some(l) = &log
+        && !r.warnings.is_empty()
+    {
+        let _ = std::fs::write(l, r.warnings.join("\n") + "\n");
+    }
+    let mut out = std::io::stdout().lock();
+    let _ = if args.both {
+        write!(out, "{}{}{}", r.left, engine::init::SEPARATOR, r.right)
+    } else if args.right {
+        write!(out, "{}", r.right)
+    } else {
+        write!(out, "{}", r.left)
+    };
+}
+
+fn timings(args: PromptArgs, config: Option<PathBuf>) -> Result<()> {
+    let doc = load_prompt_config(config).map_err(Error::Msg)?;
+    let ctx = prompt_context(&args, &doc);
+    let start = Instant::now();
+    let r = engine::render(&doc, &ctx, engine::Shell::None);
+    let total = start.elapsed();
+    let mut t = r.timings;
+    t.sort_by_key(|x| std::cmp::Reverse(x.1));
+    println!("{}", r.left.trim_start_matches('\n'));
+    if !r.right.is_empty() {
+        println!("right: {}", r.right);
+    }
+    println!();
+    let ms = |d: Duration| format!("{:>8.2}ms", d.as_secs_f64() * 1000.0);
+    for (name, d) in t {
+        println!("  {} {name}", ms(d));
+    }
+    println!("  {} total (modules run in parallel)", ms(total));
+    for w in r.warnings {
+        eprintln!("warning: {w}");
+    }
+    Ok(())
+}
+
 fn run() -> Result<()> {
     let cli = Cli::parse();
-    let path = match cli.config {
-        Some(p) => p,
-        None => default_config_path()?,
+    match cli.cmd {
+        Some(Cmd::Prompt(args)) => {
+            prompt(args, cli.config);
+            return Ok(());
+        }
+        Some(Cmd::Timings(args)) => return timings(args, cli.config),
+        Some(Cmd::Init { shell }) => {
+            let sh = engine::Shell::parse(&shell)
+                .filter(|s| *s != engine::Shell::None)
+                .ok_or_else(|| Error::Msg(format!("unsupported shell {shell:?} (zsh, bash or fish)")))?;
+            let exe = std::env::current_exe().map_err(Error::Terminal)?;
+            print!("{}", engine::init::script(sh, &exe.to_string_lossy()).unwrap_or_default());
+            return Ok(());
+        }
+        None => {}
+    }
+
+    let (path, import) = match cli.config {
+        Some(p) => (p, None),
+        None => editor_paths()?,
     };
-    let mut loaded = config::load::load(&path)?;
+    let mut loaded = config::load::load(import.as_deref().unwrap_or(&path))?;
+    let imported = match &import {
+        Some(src) => {
+            loaded.existed = false;
+            loaded.notes.push(format!(
+                "imported {} — saving writes {}; the starship file is left alone",
+                src.display(),
+                path.display()
+            ));
+            std::fs::read_to_string(src).ok()
+        }
+        None => None,
+    };
     let base_model = loaded.model.clone();
     if let Some(s) = &cli.shape {
-        let shape = model::Shape::parse(s).ok_or_else(|| Error::Starship(format!("unknown shape {s:?}")))?;
+        let shape = model::Shape::parse(s).ok_or_else(|| Error::Msg(format!("unknown shape {s:?}")))?;
         loaded.model.set_shape(shape);
         for seg in &mut loaded.model.segments {
             seg.format_override = None;
         }
     }
     if let Some(p) = &cli.preset {
-        let pal = model::palette::find(p).ok_or_else(|| Error::Starship(format!("unknown preset {p:?}")))?;
+        let pal = model::palette::find(p).ok_or_else(|| Error::Msg(format!("unknown preset {p:?}")))?;
         loaded.model.apply_palette(pal);
     }
 
@@ -93,23 +247,15 @@ fn run() -> Result<()> {
         return Ok(());
     }
 
-    let starship = preview::find_starship();
-    let starship_version = starship.as_deref().and_then(preview::starship_version);
     let (sandbox, sandbox_error) = match sandbox::ensure() {
         Ok(sb) => (Some(sb), None),
         Err(e) => (None, Some(e.to_string())),
     };
-    let env = match starship {
-        Some(bin) => Some(preview::Env { starship: bin, sandbox, work_dir: sandbox::cache_dir()? }),
-        None => None,
-    };
+    let env = preview::Env { sandbox };
 
     if cli.print_preview {
-        let env = env.ok_or_else(|| Error::StarshipMissing("not on PATH".into()))?;
         let toml = config::generate::render(&loaded.model, &loaded.doc, Some(&base_model));
-        let runner = preview::Runner::spawn(env);
-        runner.request(preview::Request { id: 1, toml, scenario: sandbox::Scenario::DirtyRepo, width: 100 });
-        let out = runner.rx.recv().map_err(|e| Error::Starship(e.to_string()))?;
+        let out = preview::render_sync(&env, &toml, sandbox::Scenario::DirtyRepo, 100);
         println!("{}", out.success.left.trim_start_matches('\n'));
         println!("{}", out.failure.left.trim_start_matches('\n'));
         if !out.success.right.is_empty() {
@@ -119,7 +265,7 @@ fn run() -> Result<()> {
             eprintln!("{w}");
         }
         if let Some(e) = out.error {
-            return Err(Error::Starship(e));
+            return Err(Error::Rejected(e));
         }
         return Ok(());
     }
@@ -131,8 +277,8 @@ fn run() -> Result<()> {
     let mut app = App::new(AppInit {
         config_path: path,
         loaded,
-        env,
-        starship_version,
+        env: Some(env),
+        imported,
         sandbox_error,
         truecolor,
         skip_boot: cli.no_boot,

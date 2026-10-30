@@ -38,7 +38,7 @@ pub fn draw(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
             Line::styled(format!("  {l}"), Style::new().fg(c).add_modifier(Modifier::BOLD))
         })
         .collect();
-    lines.push(Line::styled(format!("  starship prompt forge · bios v{} · (c) 2026 nobody", env!("CARGO_PKG_VERSION")), t.dim()));
+    lines.push(Line::styled(format!("  shell prompt forge · bios v{} · (c) 2026 nobody", env!("CARGO_PKG_VERSION")), t.dim()));
     lines.push(Line::raw(""));
 
     for (i, b) in app.boot.iter().take(visible).enumerate() {

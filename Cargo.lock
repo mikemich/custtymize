@@ -370,6 +370,7 @@ dependencies = [
  "crossterm",
  "dirs",
  "fastrand",
+ "libc",
  "ratatui",
  "thiserror 2.0.21",
  "toml_edit",

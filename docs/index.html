@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>custtymize — forge your Starship prompt</title>
-<meta name="description" content="A hacker-console TUI for designing your Starship prompt. Live preview with real starship, colour picker, presets, shapes, a before/after review and one-key backups.">
-<meta property="og:title" content="custtymize — forge your Starship prompt">
-<meta property="og:description" content="Design your Starship prompt in a terminal UI with a live preview rendered by real starship.">
+<title>custtymize — design your prompt, then run it</title>
+<meta name="description" content="Design your shell prompt in a hacker-console TUI, then run it with custtymize's own fast prompt engine. Starship-compatible config, live preview, presets, shapes, before/after review and backups.">
+<meta property="og:title" content="custtymize — design your prompt, then run it">
+<meta property="og:description" content="A hacker-console prompt designer with its own prompt engine: 2–17× faster than starship on the same config.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#282a36">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23282a36'/><path d='M7 10l7 6-7 6' stroke='%2350fa7b' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/><rect x='16' y='20' width='9' height='3' rx='1' fill='%23bd93f9'/></svg>">
@@ -210,6 +210,18 @@ kbd {
 .reqs span { font-size: 13px; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; }
 .reqs b { color: var(--fg); font-weight: 600; }
 
+
+/* benchmark bars */
+.bench { margin-top: 34px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.bench .row { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 16px; align-items: center; padding: 14px 18px; border-top: 1px solid var(--line); font-size: 14px; }
+.bench .row.head { border-top: 0; background: var(--bg-deep); color: var(--muted); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.bench .s, .bench .c { position: relative; display: flex; align-items: center; gap: 10px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bench i { display: block; height: 10px; border-radius: 3px; width: calc(var(--w) * .7); min-width: 4px; }
+.bench .s i { background: var(--comment); }
+.bench .c i { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+.bench .c { color: var(--green); font-weight: 600; }
+@media (max-width: 720px) { .bench .row { grid-template-columns: 1fr 1fr; } .bench .row > span:first-child { grid-column: 1 / -1; } .bench i { width: calc(var(--w) * .4); } }
+
 footer { border-top: 1px solid var(--line); padding: 34px 0 48px; color: var(--comment); font-size: 13px; }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: space-between; }
 
@@ -229,6 +241,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
     <a class="logo" href="#"><span class="g">▓▒░</span> custtymize</a>
     <div class="links">
       <a href="#presets">Presets</a>
+      <a href="#speed">Speed</a>
       <a href="#features">Features</a>
       <a href="#keys">Keys</a>
       <a href="#install">Install</a>
@@ -239,12 +252,12 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
 
 <header class="hero">
   <div class="wrap">
-    <span class="badge"><b>●</b> v0.1.0 · written in Rust · MIT</span>
-    <h1>Forge your <span class="grad">Starship prompt</span> in a hacker console<span class="cursor" aria-hidden="true"></span></h1>
+    <span class="badge"><b>●</b> v0.1.0 · own prompt engine · Rust · MIT</span>
+    <h1>Design your <span class="grad">shell prompt</span> in a hacker <span style="white-space:nowrap">console<span class="cursor" aria-hidden="true"></span></span></h1>
     <p class="lede">
-      custtymize is a terminal UI for designing your <a href="https://starship.rs">Starship</a> prompt.
-      Toggle modules, pick colours, shapes and presets, and watch <em>the real starship binary</em>
-      render the result as you type. Nothing touches your config until you've seen the before, the after and the diff.
+      custtymize is a prompt designer and a prompt engine in one binary. Toggle modules, pick colours,
+      shapes and presets, and watch the prompt render as you type. Then <em>custtymize runs it in your shell</em>,
+      up to 17× faster than starship on the same config. Starship's config format, no starship required.
     </p>
     <div class="cta">
       <div class="cmd">
@@ -263,7 +276,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
   <div class="wrap">
     <p class="kicker">presets × shapes</p>
     <h2>Eight palettes. Five shapes. One keypress each.</h2>
-    <p class="sub">Every prompt below came out of custtymize and was rendered by starship itself. Press <kbd>P</kbd> to cycle palettes and <kbd>S</kbd> to cycle shapes; the preview redraws in about a tenth of a second.</p>
+    <p class="sub">Every prompt below came out of custtymize. Press <kbd>P</kbd> to cycle palettes and <kbd>S</kbd> to cycle shapes; the preview redraws as fast as you can press.</p>
     <div class="strips">
       <div class="strip reveal"><div class="name"><b>dracula</b>powerline</div><img src="assets/prompt-dracula.svg" alt="Dracula powerline prompt" loading="lazy"></div>
       <div class="strip reveal"><div class="name"><b>tokyo-night</b>rounded</div><img src="assets/prompt-tokyo-night.svg" alt="Tokyo Night rounded prompt" loading="lazy"></div>
@@ -277,17 +290,34 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
   </div>
 </section>
 
+
+<section id="speed">
+  <div class="wrap">
+    <p class="kicker">speed</p>
+    <h2>Your prompt runs on every Enter. It should be instant.</h2>
+    <p class="sub">Modules run in parallel, the branch comes straight from <code>.git/HEAD</code>, git status is one call, and tool versions are cached between prompts. The cache is keyed on the binary and your <code>.nvmrc</code> / <code>.python-version</code> / <code>rust-toolchain.toml</code>, so it stays accurate when you upgrade a tool or switch projects.</p>
+    <div class="bench reveal">
+      <div class="row head"><span>same config, same directory</span><span>starship 1.27</span><span>custtymize</span></div>
+      <div class="row"><span>powerline, repo with node + python</span><span class="s"><i style="--w:97%"></i>144 ms</span><span class="c"><i style="--w:7.4%"></i>11 ms</span></div>
+      <div class="row"><span>starship defaults, same repo</span><span class="s"><i style="--w:100%"></i>148 ms</span><span class="c"><i style="--w:8.1%"></i>12 ms</span></div>
+      <div class="row"><span>starship defaults, <code>~</code></span><span class="s"><i style="--w:95%"></i>141 ms</span><span class="c"><i style="--w:5.4%"></i>8 ms</span></div>
+      <div class="row"><span>minimal one-liner, repo</span><span class="s"><i style="--w:14%"></i>21 ms</span><span class="c"><i style="--w:7.4%"></i>11 ms</span></div>
+    </div>
+    <p class="sub" style="margin-top:18px;font-size:13px">Median of 30 runs on an Apple Silicon Mac, measured as zsh calls each tool. Run <code>custtymize timings</code> to see your own numbers.</p>
+  </div>
+</section>
+
 <section id="features">
   <div class="wrap">
     <div class="feature">
       <div class="text reveal">
         <p class="kicker">live preview</p>
-        <h2>The preview is starship. Not a guess.</h2>
-        <p class="sub">custtymize writes your working config to a temp file and runs <code>starship prompt</code> against it, four times in parallel, inside a throwaway sandbox repo.</p>
+        <h2>The preview is the prompt. Same engine, same code.</h2>
+        <p class="sub">The editor's preview calls the engine your shell runs on every Enter, inside a throwaway sandbox repo. What you design is exactly what you get.</p>
         <ul>
           <li><b>Success and failure</b> states side by side, plus the right prompt</li>
           <li><b>Five scenarios</b>: dirty repo, clean repo, deep path, ssh, home. Press <kbd>s</kbd></li>
-          <li><b>Debounced</b> at 100 ms, so it keeps up with your fingers</li>
+          <li><b>One line to switch</b>: <code>eval "$(custtymize init zsh)"</code>, plus bash and fish</li>
         </ul>
       </div>
       <div class="media reveal"><img src="assets/rounded.svg" width="1103" height="723" alt="Rounded Dracula prompt in the live preview" loading="lazy"></div>
@@ -319,11 +349,11 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
       <div class="text reveal">
         <p class="kicker">review before install</p>
         <h2>See the before, the after and the diff.</h2>
-        <p class="sub"><kbd>ctrl-s</kbd> doesn't write. It opens a review: your current prompt and the new one, both rendered by starship, plus a line diff of the TOML.</p>
+        <p class="sub"><kbd>ctrl-s</kbd> doesn't write. It opens a review: your current prompt and the new one, side by side, plus a line diff of the TOML.</p>
         <ul>
           <li><b><kbd>y</kbd> installs</b>; any other key cancels and nothing is written</li>
-          <li><b>Validated</b>: the TOML must parse and starship must accept it</li>
-          <li><b>Backed up</b> to <code>starship.toml.bak-&lt;timestamp&gt;</code> first, every time</li>
+          <li><b>Validated</b>: the TOML must parse and every format string must be valid</li>
+          <li><b>Backed up</b> to <code>prompt.toml.bak-&lt;timestamp&gt;</code> first, every time</li>
         </ul>
       </div>
       <div class="media reveal"><img src="assets/review.svg" width="1103" height="723" alt="Install review screen with before and after prompts and a TOML diff" loading="lazy"></div>
@@ -337,7 +367,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
       <div class="text reveal">
         <p class="kicker">backups</p>
         <h2>Every old setup, one keypress away.</h2>
-        <p class="sub">Press <kbd>B</kbd> to browse every <code>starship.toml.bak*</code> next to your config, including the ones you made by hand, with a live render of each.</p>
+        <p class="sub">Press <kbd>B</kbd> to browse every <code>*.bak*</code> next to your config, including the ones you made by hand, with a live render of each.</p>
         <ul>
           <li><b>Restore</b> with <kbd>⏎</kbd>, through the same review screen</li>
           <li><b>The current config is backed up first</b>, so a restore can be undone too</li>
@@ -358,7 +388,9 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
       <div class="card reveal"><div class="ic">↶</div><h3>Undo &amp; redo</h3><p><kbd>u</kbd> and <kbd>ctrl-r</kbd>, across every change, including presets and shape swaps.</p></div>
       <div class="card reveal"><div class="ic">:</div><h3>Vim-style commands</h3><p><code>:w</code>, <code>:preset</code>, <code>:set git_branch.bg #ff79c6</code>, <code>:add kubernetes</code>, with tab completion and history.</p></div>
       <div class="card reveal"><div class="ic">▤</div><h3>Layouts &amp; caps</h3><p>One line, two lines or a right prompt. Gradient <code>░▒▓</code> or rounded caps. Your prompt character in success and error colours.</p></div>
-      <div class="card reveal"><div class="ic">⚙</div><h3>Scriptable</h3><p><code>--dry-run --preset nord --shape rounded</code> prints the TOML; <code>--print-preview</code> prints the rendered prompt.</p></div>
+      <div class="card reveal"><div class="ic">⚙</div><h3>Scriptable</h3><p><code>--dry-run --preset nord --shape rounded</code> prints the TOML; <code>custtymize timings</code> shows each module's cost.</p></div>
+      <div class="card reveal"><div class="ic">⛨</div><h3>Hostile-repo safe</h3><p>Branch names are shown literally. A branch called <code>$(rm -rf ~)</code> is just text, in zsh and bash.</p></div>
+      <div class="card reveal"><div class="ic">★</div><h3>Starship-compatible</h3><p>Same format language and defaults, checked character by character against starship. Bring your <code>starship.toml</code>; take it back any time.</p></div>
       <div class="card reveal"><div class="ic">▒</div><h3>256-colour fallback</h3><p>Truecolour is detected (including Apple Terminal on macOS 26), with a clean xterm-256 downsample everywhere else.</p></div>
       <div class="card reveal"><div class="ic">⛁</div><h3>Atomic &amp; symlink-aware</h3><p>Writes go to a temp file and are renamed into place, through the link if your config lives in a dotfiles repo.</p></div>
       <div class="card reveal"><div class="ic">◉</div><h3>It boots</h3><p>A 600 ms BIOS-style boot (any key skips), CRT scanlines, a typewriter log, and something behind <kbd>M</kbd>.</p></div>
@@ -393,21 +425,21 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
   <div class="wrap">
     <p class="kicker">install</p>
     <h2>Thirty seconds to a better prompt.</h2>
-    <p class="sub">You need Rust, starship on your <code>PATH</code>, and a Nerd Font in your terminal for the powerline, rounded and slanted glyphs.</p>
+    <p class="sub">You need Rust and a Nerd Font in your terminal for the powerline, rounded and slanted glyphs. No starship.</p>
     <div class="term">
       <div class="bar"><i style="background:#ff5555"></i><i style="background:#f1fa8c"></i><i style="background:#50fa7b"></i></div>
 <pre><span class="c"># install</span>
 <span class="p">$</span> cargo install --git https://github.com/mikemich/custtymize
 
-<span class="c"># design (nothing is written until you review and press y)</span>
+<span class="c"># design: starts from your starship.toml if you have one; nothing is written until you press y</span>
 <span class="p">$</span> custtymize
 
-<span class="c"># or try it on a copy first</span>
-<span class="p">$</span> cp ~/.config/starship.toml /tmp/try.toml &amp;&amp; custtymize -c /tmp/try.toml</pre>
+<span class="c"># run it: add to ~/.zshrc (bash and fish work too)</span>
+<span class="p">$</span> eval "$(custtymize init zsh)"</pre>
     </div>
     <div class="reqs">
       <span><b>Rust</b> 1.88+</span>
-      <span><b>starship</b> on PATH</span>
+      <span><b>zsh · bash · fish</b></span>
       <span><b>Nerd Font</b> e.g. JetBrains Mono</span>
       <span><b>macOS</b> tested · Linux should work</span>
     </div>
@@ -421,7 +453,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: 
 <footer>
   <div class="wrap">
     <span>▓▒░ custtymize · MIT licensed · built with <a href="https://ratatui.rs">ratatui</a></span>
-    <span>Not affiliated with the Starship project.</span>
+    <span>Speaks Starship's config format; not affiliated with the Starship project.</span>
   </div>
 </footer>
 

@@ -14,10 +14,10 @@ pub enum Error {
     Parse { path: PathBuf, message: String },
     #[error("generated TOML does not parse: {0}")]
     InvalidToml(String),
-    #[error("starship rejected the config: {0}")]
-    Starship(String),
-    #[error("could not run starship: {0}")]
-    StarshipMissing(String),
+    #[error("config rejected: {0}")]
+    Rejected(String),
+    #[error("{0}")]
+    Msg(String),
     #[error("cannot find the home directory")]
     NoHome,
     #[error("terminal error: {0}")]

@@ -359,7 +359,8 @@ pub struct App {
     pub preview: Option<PreviewState>,
     pub preview_width: u16,
     pub scenario: Scenario,
-    pub starship_version: Option<String>,
+    pub engine_version: String,
+    imported: Option<String>,
 
     pub truecolor: bool,
     pub flash: Option<(String, Instant)>,
@@ -369,7 +370,8 @@ pub struct AppInit {
     pub config_path: PathBuf,
     pub loaded: load::Loaded,
     pub env: Option<preview::Env>,
-    pub starship_version: Option<String>,
+    /// Text of a starship config being imported (not yet saved to `config_path`).
+    pub imported: Option<String>,
     pub sandbox_error: Option<String>,
     pub truecolor: bool,
     pub skip_boot: bool,
@@ -384,22 +386,18 @@ fn home_relative(p: &Path) -> String {
 
 impl App {
     pub fn new(init: AppInit) -> App {
-        let AppInit { config_path, loaded, env, starship_version, sandbox_error, truecolor, skip_boot } = init;
+        let AppInit { config_path, loaded, env, imported, sandbox_error, truecolor, skip_boot } = init;
         let disk_text = std::fs::read_to_string(&config_path).ok();
         let runner = env.clone().map(Runner::spawn);
 
         let mut boot = Vec::new();
         boot.push(BootLine {
-            text: "probing starship binary".into(),
-            status: match (&env, &starship_version) {
-                (Some(_), Some(v)) => Ok(v.clone()),
-                (Some(_), None) => Ok("found".into()),
-                (None, _) => Err("NOT FOUND".into()),
-            },
+            text: "warming prompt engine".into(),
+            status: Ok(format!("{} modules", crate::engine::SUPPORTED.len())),
         });
         boot.push(BootLine {
             text: format!("mounting {}", home_relative(&config_path)),
-            status: Ok(if loaded.existed { format!("{} keys", loaded.doc.as_table().len()) } else { "new".into() }),
+            status: Ok(if loaded.existed { format!("{} keys", loaded.doc.as_table().len()) } else if imported.is_some() { "import".into() } else { "new".into() }),
         });
         boot.push(BootLine {
             text: "building sandbox repo".into(),
@@ -442,7 +440,8 @@ impl App {
             preview: None,
             preview_width: 100,
             scenario: Scenario::DirtyRepo,
-            starship_version,
+            engine_version: env!("CARGO_PKG_VERSION").to_string(),
+            imported,
             truecolor,
             flash: None,
         };
@@ -450,9 +449,6 @@ impl App {
         app.log(Tag::Sys, format!("config: {}", home_relative(&app.config_path)));
         for n in loaded.notes {
             app.log(Tag::Warn, n);
-        }
-        if app.env.is_none() {
-            app.log(Tag::Err, "starship not found on PATH — preview and saving disabled".into());
         }
         if let Some(e) = sandbox_error {
             app.log(Tag::Warn, format!("sandbox unavailable ({e}); previewing in the current dir"));
@@ -610,8 +606,7 @@ impl App {
             .cloned()
             .collect();
         for w in new_warnings {
-            let tag = if preview::is_fatal(&w) { Tag::Err } else { Tag::Warn };
-            self.log(tag, w);
+            self.log(Tag::Warn, w);
         }
         if let Some(e) = &o.error
             && self.preview.as_ref().is_none_or(|p| p.error.as_ref() != Some(e)) {
@@ -835,7 +830,7 @@ impl App {
             }
             Field::Opt(o) if s.options.contains_key(o.key) => {
                 s.options.remove(o.key);
-                Some(format!("{}.{} reset to starship default", s.name, o.key))
+                Some(format!("{}.{} reset to default", s.name, o.key))
             }
             _ => None,
         });
@@ -1394,12 +1389,8 @@ impl App {
 
     /// Validates the generated TOML, logging warnings. `None` means "don't write".
     fn validated(&mut self, toml: &str) -> Option<()> {
-        let Some(env) = self.env.clone() else {
-            self.log(Tag::Err, "refusing to save: starship not found, can't validate".into());
-            return None;
-        };
-        self.log(Tag::Sys, "validating: toml parse + starship dry run…".into());
-        match preview::validate(&env, toml) {
+        self.log(Tag::Sys, "validating: toml parse + format check…".into());
+        match preview::validate(toml) {
             Ok(warnings) => {
                 for w in warnings {
                     self.log(Tag::Warn, w);
@@ -1458,11 +1449,12 @@ impl App {
             return;
         }
         let Some(env) = self.env.clone() else { return };
-        let current = std::fs::read_to_string(&self.config_path).ok();
+        // Before the first save, "current" is the starship config being imported.
+        let current = std::fs::read_to_string(&self.config_path).ok().or_else(|| self.imported.clone());
         let (scenario, width) = (self.scenario, self.preview_width);
         let (before, after) = std::thread::scope(|sc| {
-            let b = current.as_deref().map(|c| sc.spawn(|| preview::render_sync(&env, c, scenario, width, "before")));
-            let a = preview::render_sync(&env, &toml, scenario, width, "after");
+            let b = current.as_deref().map(|c| sc.spawn(|| preview::render_sync(&env, c, scenario, width)));
+            let a = preview::render_sync(&env, &toml, scenario, width);
             (b.and_then(|h| h.join().ok()), a)
         });
         let diff = diff::lines(current.as_deref().unwrap_or(""), &toml);
@@ -1523,6 +1515,7 @@ impl App {
                 self.base_model = self.model.clone();
                 self.saved = self.model.clone();
                 self.disk_text = Some(r.toml.clone());
+                self.imported = None;
             }
             InstallKind::Restore(from) => {
                 self.log(Tag::Ok, format!("restored {}", home_relative(from)));
@@ -1530,7 +1523,11 @@ impl App {
             }
         }
         self.flash = Some(("INSTALLED".into(), Instant::now()));
-        self.log(Tag::Ok, "open a new shell (or press enter) to see it".into());
+        if std::env::var_os("CUSTTYMIZE_SHELL").is_some() {
+            self.log(Tag::Ok, "press enter in your shell to see it".into());
+        } else {
+            self.log(Tag::Warn, "not active in this shell yet: add  eval \"$(custtymize init zsh)\"  to ~/.zshrc".into());
+        }
         if r.quit_after {
             self.quit = true;
         }
@@ -1578,8 +1575,8 @@ impl App {
         let (Some(env), Some(entry)) = (self.env.clone(), b.entries.get(b.idx)) else { return };
         match std::fs::read_to_string(&entry.path) {
             Ok(text) => {
-                let o = preview::render_sync(&env, &text, self.scenario, self.preview_width, "backup");
-                b.preview_error = o.error.clone().or_else(|| o.warnings.iter().find(|w| preview::is_fatal(w)).cloned());
+                let o = preview::render_sync(&env, &text, self.scenario, self.preview_width);
+                b.preview_error = o.error.clone();
                 b.preview = Some((rendered(&o.success), rendered(&o.failure)));
             }
             Err(e) => b.preview_error = Some(e.to_string()),
@@ -1878,7 +1875,7 @@ pub const COMMANDS: &[(&str, &str)] = &[
     ("char", "<glyph>  prompt character"),
     ("scenario", "<s>      preview context"),
     ("set", "<m.k> <v> set any field, e.g. git_branch.bg #ff79c6"),
-    ("add", "<module>  add a module (catalog or any starship module)"),
+    ("add", "<module>  add a module (catalog or custom.<name>)"),
     ("rm", "[module]  remove a module"),
     ("toml", "         view the generated TOML"),
     ("yank", "         copy the generated TOML (pbcopy)"),

@@ -1,4 +1,4 @@
-//! The live preview pane: real `starship prompt` output, success and error states.
+//! The live preview pane: the prompt engine's output, success and error states.
 
 use ratatui::Frame;
 use ratatui::layout::{Alignment, Rect};
@@ -92,13 +92,15 @@ pub(super) fn draw_state(f: &mut Frame, area: Rect, prompt: &RenderedPrompt, lab
     }
     let text: Text = prompt.left.clone();
     f.render_widget(Paragraph::new(text), screen);
-    // starship draws the right prompt on the last line of the left one.
+    // The right prompt sits on the last line of the left one.
     if !prompt.right.lines.is_empty() {
         let last = screen.y + (prompt.left.lines.len().max(1) as u16 - 1).min(screen.height - 1);
         let row = Rect::new(screen.x, last, screen.width.saturating_sub(1), 1);
         let right_line = prompt.right.lines.first().cloned().unwrap_or_default();
         let w = right_line.width() as u16;
-        if w > 0 && w < row.width {
+        let left_w = prompt.left.lines.last().map(|l| l.width() as u16).unwrap_or(0);
+        // Like zsh: a right prompt that would collide with the left one isn't drawn.
+        if w > 0 && left_w + 1 + w <= row.width {
             let r = Rect::new(row.right() - w, row.y, w, 1);
             f.render_widget(Paragraph::new(right_line), r);
         }

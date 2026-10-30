@@ -69,13 +69,13 @@ fn draw_header(f: &mut Frame, area: Rect, app: &App, t: &Theme) {
         Span::styled("▓▒░", Style::new().fg(t.accent)),
         Span::styled(" CUSTTYMIZE ", Style::new().fg(t.bg).bg(t.accent).add_modifier(Modifier::BOLD)),
         Span::styled("░▒▓", Style::new().fg(t.accent)),
-        Span::styled("  starship prompt forge ", t.dim()),
+        Span::styled("  shell prompt forge ", t.dim()),
         Span::styled("// ", t.faint()),
         Span::styled(format!("v{}", env!("CARGO_PKG_VERSION")), t.dim()),
     ]);
     let link = if app.preview_pending { ("◌", t.warn) } else if blink { ("●", t.ok) } else { ("○", t.ok) };
     let right = Line::from(vec![
-        Span::styled(format!("starship {} ", app.starship_version.as_deref().unwrap_or("??")), t.dim()),
+        Span::styled(format!("engine v{} ", app.engine_version), t.dim()),
         Span::styled("│ ", t.faint()),
         Span::styled(format!("{} ", if app.truecolor { "24bit" } else { "256c" }), t.dim()),
         Span::styled("│ ", t.faint()),

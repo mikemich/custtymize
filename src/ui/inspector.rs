@@ -143,7 +143,7 @@ fn value_spans(app: &App, seg: &Segment, field: Field, t: &Theme) -> Vec<Span<'s
                     OptKind::Str => format!("{:?}", o.default),
                     _ => o.default.to_string(),
                 };
-                vec![Span::styled(d, t.faint()), Span::styled("  (starship default)", t.faint())]
+                vec![Span::styled(d, t.faint()), Span::styled("  (default)", t.faint())]
             }
         },
         Field::PromptChar => vec![Span::styled(g.prompt_char.clone(), Style::new().fg(g.success.into()).add_modifier(Modifier::BOLD))],

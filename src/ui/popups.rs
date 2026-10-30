@@ -294,7 +294,7 @@ fn review(f: &mut Frame, area: Rect, app: &App, r: &InstallReview, t: &Theme) {
             prompt_pair(f, Rect::new(inner.x, y, inner.width, h), p, t);
             y += h;
         }
-        None => line(f, &mut y, Line::styled("   (no config file yet: starship defaults)", t.dim())),
+        None => line(f, &mut y, Line::styled("   (no config file yet: defaults)", t.dim())),
     }
     line(f, &mut y, Line::raw(""));
     line(f, &mut y, heading("AFTER · what it will show".into(), Style::new().fg(t.ok), t));
